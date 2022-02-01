@@ -9,6 +9,8 @@ public class TileNode : MonoBehaviour, IHitable
 
     private SpriteRenderer _renderer;
 
+    [SerializeField] private bool hasItem;
+
 
     private void Awake()
     {
@@ -17,12 +19,23 @@ public class TileNode : MonoBehaviour, IHitable
 
     private void Start() 
     {
-        _renderer.sprite = tileNodeData.defaultRockSprite;
+//        _renderer.sprite = tileNodeData.defaultRockSprite;
+        if (tileNodeData.propertySprite == null)
+            hasItem = false;
+        else
+            hasItem = true;
     }
 
     public void Hit()
     {
         Debug.Log("hit");
-        _renderer.sprite = tileNodeData.propertySprite;
+        if (hasItem)
+        {
+            _renderer.sprite = tileNodeData.propertySprite;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

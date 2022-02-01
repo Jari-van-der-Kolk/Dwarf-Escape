@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,10 +83,13 @@ public class PerlinMapGenerator : MonoBehaviour
     	GameObject tile = Instantiate(tile_prefab, tile_group.transform);
 
     	tile.name = string.Format("tile_x{0}_y{1}", x, y);
-
-        
-        
     	tile.transform.localPosition = new Vector3( x - (mapWidth * 0.5f) , y - (mapHeight * 0.5f), 0);
+    }
 
+
+    private void OnDrawGizmos()
+    {
+	    Gizmos.color = Color.red;
+	    Gizmos.DrawWireCube(transform.position - (Vector3.one * .5f), new Vector3(mapWidth, mapWidth));
     }
 }
