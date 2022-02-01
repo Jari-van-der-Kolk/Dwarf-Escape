@@ -11,7 +11,8 @@ namespace Player
         
         private void LateUpdate()
         {
-            //RotateToAngle();
+            Debug.DrawRay(transform.position, transform.right, Color.magenta);
+
             if(Input.GetMouseButtonDown(0))
                 Mine();
         }
