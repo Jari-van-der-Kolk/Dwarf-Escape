@@ -90,6 +90,6 @@ public class PerlinMapGenerator : MonoBehaviour
     private void OnDrawGizmos()
     {
 	    Gizmos.color = Color.red;
-	    Gizmos.DrawWireCube(transform.position - (Vector3.one * .5f), new Vector3(mapWidth, mapWidth));
+	    Gizmos.DrawWireCube(transform.position - (Vector3.one * .5f), new Vector3(mapWidth, mapHeight));
     }
 }
