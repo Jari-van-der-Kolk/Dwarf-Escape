@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Player
 {
-    public class MineBlocks : MonoBehaviour
+    public class Pickaxe : MonoBehaviour
     {
         private float dir;
         [SerializeField] private float mineDistance;
         [SerializeField] private LayerMask mask;
+        public int hitAmount;
         
         private void LateUpdate()
         {
@@ -20,7 +21,7 @@ namespace Player
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, mineDistance, mask);
             if (hit.collider != null)
-                hit.collider.GetComponent<IHitable>().Hit();
+                hit.collider.GetComponent<IHitable>().Hit(hitAmount);
         }
         
         

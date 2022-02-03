@@ -40,6 +40,11 @@ public class TabGroup : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        SetActive(0);
+    }
+
     public void StartActiveTab()
     {
         if (selectedTab == null)

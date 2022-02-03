@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Default tile
   m_EditorClassIdentifier: 
   defaultRockSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  propertySprite: {fileID: 0}
+  property: {fileID: 0}
+  particle: {fileID: 0}
+  durability: 2

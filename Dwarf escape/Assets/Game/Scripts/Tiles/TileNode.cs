@@ -10,6 +10,7 @@ public class TileNode : MonoBehaviour, IHitable
     private SpriteRenderer _renderer;
 
     [SerializeField] private bool hasItem;
+    private int durability;
 
 
     private void Awake()
@@ -19,23 +20,31 @@ public class TileNode : MonoBehaviour, IHitable
 
     private void Start() 
     {
-//        _renderer.sprite = tileNodeData.defaultRockSprite;
-        if (tileNodeData.propertySprite == null)
+        //_renderer.sprite = tileNodeData.defaultRockSprite;
+        if (tileNodeData.property == null)
             hasItem = false;
         else
             hasItem = true;
+
+        durability = tileNodeData.durability;
     }
 
-    public void Hit()
+    public void Hit(int hitAmount)
     {
-        Debug.Log("hit");
-        if (hasItem)
-        {
-            _renderer.sprite = tileNodeData.propertySprite;
-        }
-        else
+        durability -= hitAmount;
+        TileDestroyed();
+    }
+
+    private void TileDestroyed()
+    {
+        if (durability <= 0)
         {
             gameObject.SetActive(false);
         }
+        if (hasItem)
+        {
+            Instantiate(tileNodeData.property);
+        }
     }
+    
 }
