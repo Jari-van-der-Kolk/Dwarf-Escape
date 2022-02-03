@@ -11,7 +11,8 @@ public class Shoot : MonoBehaviour
 
     [SerializeField] private Transform shootPos;
     [SerializeField] private GameObject prefab;
-    [SerializeField] private float shootSpeed;
+    public float shootSpeed;
+    public float bulletSpeed;
     private float timer;
 
     private void Start()
@@ -23,6 +24,7 @@ public class Shoot : MonoBehaviour
         {
             bullet.SetActive(true);
             bullet.transform.position = shootPos.position;
+            bullet.GetComponent<Rigidbody2D>().velocity = shootPos.right * bulletSpeed;
         }, bullet =>
         {
             bullet.SetActive(false);
@@ -38,9 +40,8 @@ public class Shoot : MonoBehaviour
         timer += Time.deltaTime * shootSpeed;
         
         if (timer >= 1f && Input.GetMouseButtonDown(0) )
-        {
-            var bullet = pool.Get();
-            bullet.GetComponent<Rigidbody2D>().velocity = transform.forward;
+        { 
+            pool.Get();
             timer = 0f;
         }
     }
