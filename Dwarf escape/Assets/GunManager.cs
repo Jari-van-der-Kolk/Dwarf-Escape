@@ -4,23 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Shoot : MonoBehaviour
+public class GunManager : MonoBehaviour
 {
-
-    private ObjectPool<GameObject> pool;
+    
+    
+    
+    public ObjectPool<GameObject> pool;
+    private List<Bullet> bullets;
 
     [SerializeField] private Transform shootPos;
     [SerializeField] private GameObject prefab;
     public float shootSpeed;
     public float bulletSpeed;
+    public int bulletDamage;
+
     private float timer;
 
     private void Start()
     {
-        pool = new ObjectPool<GameObject>(() =>
-        {
-            return Instantiate(prefab);
-        }, bullet =>
+        pool = new ObjectPool<GameObject>(CreateBullet, bullet =>
         {
             bullet.SetActive(true);
             bullet.transform.position = shootPos.position;
@@ -34,6 +36,25 @@ public class Shoot : MonoBehaviour
         }, false, 30, 50);
     }
 
+    public void Subscribe(Bullet bullet)
+    {
+        if (bullets == null)
+        {
+            bullets = new List<Bullet>();
+        }
+
+        bullets.Add(bullet);
+    }
+
+    private GameObject CreateBullet()
+    {
+        GameObject bulletObject = Instantiate(prefab);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+        bullet.gunManager = this;
+        Subscribe(bullet);
+        return bulletObject;
+    }
+    
 
     private void Update()
     {

@@ -21,7 +21,7 @@ namespace Player
 
         void Update()
         {
-            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * Time.deltaTime * moveSpeed;
+            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * (Time.deltaTime * moveSpeed);
             rb.MovePosition(rb.position += movement);
         }
     }

@@ -5,15 +5,32 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GunManager gunManager;
+    public float deactivateCounter = 10f;
 
-    public int damage;
+    private void OnEnable()
+    {
+        StartCoroutine(DeactivateTime(deactivateCounter));
+    }
+
+    private void OnDisable()
+    {
+        gunManager.pool.Release(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<IHitable>().Hit(damage);
+            other.GetComponent<IHitable>().Hit(gunManager.bulletDamage);
+            gunManager.pool.Release(gameObject);
         }
     }
-    
+
+    private IEnumerator DeactivateTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        gunManager.pool.Release(gameObject);
+    }
     
 }

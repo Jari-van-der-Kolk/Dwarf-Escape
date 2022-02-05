@@ -1,15 +1,23 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class Pickaxe : MonoBehaviour
     {
+        private PlayerInput playerInput;
+        
         private float dir;
         [SerializeField] private float mineDistance;
         [SerializeField] private LayerMask mask;
         public int hitAmount;
-        
+
+        private void Awake()
+        {
+            playerInput = GetComponent<PlayerInput>();
+        }
+
         private void LateUpdate()
         {
             Debug.DrawRay(transform.position, transform.right, Color.magenta);

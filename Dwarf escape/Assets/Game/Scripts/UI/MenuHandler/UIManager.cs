@@ -62,22 +62,8 @@ namespace JariUnityUISystem
             }
             return false;
         }
-        
-        private void Deactivate(MenuNode menuNode)
-        {
-            menuNode.Deactivate();
-            selectedMenus.Remove(menuNode);
-        }
-        
-        private void ActivateMenu(MenuNode menuNode)
-        {
-            if (CheckPriority(menuNode) == false)
-            {
-                menuNode.Activate();
-                selectedMenus.Add(menuNode);
-            } 
-        }
-        
+
+
         private bool CheckPriority(MenuNode menuNode)
         {
             for (int i = 0; i < selectedMenus.Count; i++)
@@ -89,16 +75,25 @@ namespace JariUnityUISystem
             }
             return false;
         }
-        
-        private void AddLowestPriority()
+
+        private void ActivateMenu(MenuNode menuNode)
         {
-            MenuNode lowestPriority = new MenuNode();
-            lowestPriority.priority = int.MinValue;
-            selectedMenus.Add(lowestPriority);
+            if (CheckPriority(menuNode) == false)
+            {
+                menuNode.Activate();
+                selectedMenus.Add(menuNode);
+            } 
+        }
+
+        private void Deactivate(MenuNode menuNode)
+        {
+            menuNode.Deactivate();
+            selectedMenus.Remove(menuNode);
         }
 
         public void DeactivateAll()
         {
+            //pas op in welke volgorde je de UnityEvents gebruikt. 
             foreach (var m in menus)
             {
                 Deactivate(m);
@@ -108,6 +103,25 @@ namespace JariUnityUISystem
         public void ChangeTime(float timeSpeed)
         {
             Time.timeScale = timeSpeed;
+            Debug.Log(Time.timeScale);
         }
+        
+        private void AddLowestPriority()
+        {
+            MenuNode lowestPriority = new MenuNode();
+            lowestPriority.priority = int.MinValue;
+            selectedMenus.Add(lowestPriority);
+        }
+
+        public void ChangeObjectActivityState(GameObject panel)
+        {
+            panel.SetActive(!panel.activeSelf);
+        }
+        
+        public void ActivateGameObject(GameObject panel) => panel.SetActive(true);
+        public void DeactivateGameObject(GameObject panel) => panel.SetActive(false);
+
+        public void DeactivateScript(Behaviour behaviour) => behaviour.enabled = false;
+        public void ActivateScript(Behaviour behaviour) => behaviour.enabled = true;
     }
 }
