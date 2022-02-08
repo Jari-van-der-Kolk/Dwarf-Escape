@@ -33,10 +33,10 @@ public class TooltipSystem : MonoBehaviour
         instance.tooltip.gameObject.SetActive(true);
     }
 
-    public static void Show(CraftingTooltipData content, string header = "") 
+    /*public static void Show(CraftingTooltipData content, string header = "") 
     {
         //instance
-    }
+    }*/
 
     public static void Hide()
     {

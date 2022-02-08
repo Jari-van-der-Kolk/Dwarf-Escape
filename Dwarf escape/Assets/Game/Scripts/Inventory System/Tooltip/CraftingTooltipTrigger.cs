@@ -11,7 +11,7 @@ public class CraftingTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.Show(content, header);
+        //TooltipSystem.Show(content, header);
     }
 
     public void OnPointerExit(PointerEventData eventData)
