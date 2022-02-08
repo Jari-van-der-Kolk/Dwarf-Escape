@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TabGroup : MonoBehaviour
 {
@@ -16,27 +17,42 @@ public class TabGroup : MonoBehaviour
 
     public PanelGroup panelGroup;
 
+    private DefaultInputActions _defaultInputActions;
+    
+    private void Awake()
+    {
+        _defaultInputActions = new DefaultInputActions();
+        _defaultInputActions.UI.Enable();
+        _defaultInputActions.UI.Navigate.performed += NextTab;
+
+    }
+    
     private void Start()
     {
         StartActiveTab();
     }
 
-    private void Update()
+    private void NextTab(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (_defaultInputActions.UI.Navigate.ReadValue<Vector2>() == Vector2.up)
         {
-            if (selectedTab.transform.GetSiblingIndex() > 0)
+            int nextTabIndex = selectedTab.transform.GetSiblingIndex() - 1;
+            if (nextTabIndex < 0)
             {
-                SetActive(selectedTab.transform.GetSiblingIndex() - 1);
+                SetActive(transform.childCount - 1);
             }
+            SetActive(nextTabIndex);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (_defaultInputActions.UI.Navigate.ReadValue<Vector2>() == Vector2.down)
         {
-            if (selectedTab.transform.GetSiblingIndex() < (transform.childCount - 1))
+            int nextTabIndex = selectedTab.transform.GetSiblingIndex() + 1;
+            if (nextTabIndex > transform.childCount - 1)
             {
-                SetActive(selectedTab.transform.GetSiblingIndex() + 1);
+                SetActive(0);
+                return;
             }
+            SetActive(nextTabIndex);
         }
     }
 
@@ -68,14 +84,14 @@ public class TabGroup : MonoBehaviour
             panelGroup.SetPageIndex(tabButton.transform.GetSiblingIndex());
         }
     }
-    
-    public void SetActive(int siblingIndex)
+
+    private void SetActive(int siblingIndex)
     {
-        for(int i = 0; i < tabButtons.Count; i++)
+        foreach (var t in tabButtons)
         {
-            if (tabButtons[i].transform.GetSiblingIndex() == siblingIndex)    
+            if (t.transform.GetSiblingIndex() == siblingIndex)    
             {
-                SetActive(tabButtons[i]);
+                SetActive(t);
                 return;
             }
         }

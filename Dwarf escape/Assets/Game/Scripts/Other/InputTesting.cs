@@ -12,6 +12,7 @@ public class InputTesting : MonoBehaviour
     {
         _playerInput = FindObjectOfType<PlayerInput>();
 
+        
         _playerInput.onActionTriggered += Fuckyou;
     }
     

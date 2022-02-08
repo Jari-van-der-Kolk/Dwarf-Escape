@@ -6,7 +6,7 @@ namespace Player
 {
     public class Pickaxe : MonoBehaviour
     {
-        private PlayerInput playerInput;
+        private DefaultInputActions defaultInputActions;
         
         private float dir;
         [SerializeField] private float mineDistance;
@@ -15,18 +15,19 @@ namespace Player
 
         private void Awake()
         {
-            playerInput = GetComponent<PlayerInput>();
+            defaultInputActions = new DefaultInputActions();
+            defaultInputActions.Player.Mine.Enable();
+            defaultInputActions.Player.Mine.performed += Mine;
         }
 
         private void LateUpdate()
         {
             Debug.DrawRay(transform.position, transform.right, Color.magenta);
 
-            if(Input.GetMouseButtonDown(0))
-                Mine();
         }
-        private void Mine()
+        private void Mine(InputAction.CallbackContext context)
         {
+            Debug.Log("fuck you");
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, mineDistance, mask);
             if (hit.collider != null)
                 hit.collider.GetComponent<IHitable>().Hit(hitAmount);

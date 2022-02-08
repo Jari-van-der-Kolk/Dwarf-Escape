@@ -8,8 +8,8 @@ namespace JariUnityUISystem
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private List<MenuNode> menus;
-        [SerializeField] private List<MenuNode> selectedMenus;
-        private MenuNode lowestPriority;
+        [SerializeField] private List<MenuNode> _selectedMenus;
+        private MenuNode _lowestPriority;
         
         private void Awake()
         {
@@ -51,7 +51,7 @@ namespace JariUnityUISystem
         private bool StopActivity()
         {
             //hij gaat door alles heen dat in de selectedMenus staat
-            foreach (var s in selectedMenus)
+            foreach (var s in _selectedMenus)
             {
                 //als er een van de selectedMenus een boolean heeft waar de stopActivity true op staat
                 //zet hij de functie StopActivity op true
@@ -66,9 +66,9 @@ namespace JariUnityUISystem
 
         private bool CheckPriority(MenuNode menuNode)
         {
-            for (int i = 0; i < selectedMenus.Count; i++)
+            for (int i = 0; i < _selectedMenus.Count; i++)
             {
-                if (menuNode.priority < selectedMenus[i].priority)
+                if (menuNode.priority < _selectedMenus[i].priority)
                 {
                     return true;
                 }
@@ -81,14 +81,14 @@ namespace JariUnityUISystem
             if (CheckPriority(menuNode) == false)
             {
                 menuNode.Activate();
-                selectedMenus.Add(menuNode);
+                _selectedMenus.Add(menuNode);
             } 
         }
 
         private void Deactivate(MenuNode menuNode)
         {
             menuNode.Deactivate();
-            selectedMenus.Remove(menuNode);
+            _selectedMenus.Remove(menuNode);
         }
 
         public void DeactivateAll()
@@ -103,14 +103,13 @@ namespace JariUnityUISystem
         public void ChangeTime(float timeSpeed)
         {
             Time.timeScale = timeSpeed;
-            Debug.Log(Time.timeScale);
         }
         
         private void AddLowestPriority()
         {
             MenuNode lowestPriority = new MenuNode();
             lowestPriority.priority = int.MinValue;
-            selectedMenus.Add(lowestPriority);
+            _selectedMenus.Add(lowestPriority);
         }
 
         public void ChangeObjectActivityState(GameObject panel)

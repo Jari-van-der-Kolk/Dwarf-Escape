@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -12,16 +13,24 @@ namespace Player
         [HideInInspector] public Transform playerTransform;
 
         private Rigidbody2D rb;
-
+        private DefaultInputActions playerController;
+        
         private void Awake()
-        {
+        { 
             rb = GetComponent<Rigidbody2D>();
-            playerTransform = transform;
+
+            playerController = new DefaultInputActions();
+            playerController.Player.Move.Enable();
         }
 
-        void Update()
+        private void Update()
         {
-            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * (Time.deltaTime * moveSpeed);
+           Move();
+        }
+
+        private void Move()
+        {
+            Vector2 movement = playerController.Player.Move.ReadValue<Vector2>() * (Time.deltaTime * moveSpeed);;
             rb.MovePosition(rb.position += movement);
         }
     }

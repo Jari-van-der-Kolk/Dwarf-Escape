@@ -2,13 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 
 public class GunManager : MonoBehaviour
 {
-    
-    
-    
     public ObjectPool<GameObject> pool;
     private List<Bullet> bullets;
 
@@ -19,6 +17,14 @@ public class GunManager : MonoBehaviour
     public int bulletDamage;
 
     private float timer;
+
+    private DefaultInputActions _playerController;
+
+    private void Awake()
+    {
+        _playerController = new DefaultInputActions();
+        _playerController.Player.Fire.Enable();
+    }
 
     private void Start()
     {
@@ -60,7 +66,7 @@ public class GunManager : MonoBehaviour
     {
         timer += Time.deltaTime * shootSpeed;
         
-        if (timer >= 1f && Input.GetMouseButtonDown(0) )
+        if (timer >= 1f && _playerController.Player.Fire.triggered)
         { 
             pool.Get();
             timer = 0f;
