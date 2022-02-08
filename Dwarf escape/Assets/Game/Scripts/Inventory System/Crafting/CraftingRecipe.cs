@@ -10,7 +10,7 @@ public class CraftingRecipe : MonoBehaviour
     [SerializeField] private int craftingTier;
     [SerializeField] private int maxTier;
     [SerializeField] private bool useTiers; // activate useTiers if you use the script for upgrading items
-    [SerializeField] private CraftingRecipeData[] craftingRecipeData;
+    public CraftingRecipeData[] craftingRecipeData;
     [SerializeField] private UnityEvent action;
 
     private void Awake()
@@ -26,15 +26,14 @@ public class CraftingRecipe : MonoBehaviour
 
     public void Craft()
     {
-        if (useTiers && craftingTier <= maxTier)
+        
+        if (CheckAmount())
         {
-            if (CheckAmount())
-            {
-                Debug.Log("crafting");
-                action?.Invoke();
-                RemoveUsedItems();
-            }
+            Debug.Log("crafting");
+            action?.Invoke();
+            RemoveUsedItems();
         }
+        
     }
     
     public bool CheckAmount(InventoryItem item ,int index)
@@ -50,7 +49,7 @@ public class CraftingRecipe : MonoBehaviour
         for (int i = 0; i < requirementAmount; i++)
         {
             InventoryItem item = InventorySystem.instance.Get(craftingRecipeData[craftingTier].requiredItems[i].itemData);
-            if (item == null)
+            if (item == null || item.stackSize < craftingRecipeData[craftingTier].requiredItems[i].amount)
             {
                 Debug.Log("items missing");
                 return false;
@@ -81,6 +80,7 @@ for (int i = 0; i < requirementAmount; i++)
 }*/
 
 
+/*
 public class KeyRequirement : MonoBehaviour, IInteract
 {
     public InventoryItemData referenceItem;
@@ -116,4 +116,5 @@ public class KeyRequirement : MonoBehaviour, IInteract
         }
         return "You cannot open the Door without its key";
     }
-}
+*/
+//}

@@ -12,8 +12,10 @@ public class TooltipSystem : MonoBehaviour
     public static TooltipSystem instance;
 
     public Tooltip tooltip;
+    public CraftingTooltip craftingTooltip;
     
     private InputSystemUIInputModule inputModule;
+
 
     
     public static Vector2 mousePosition
@@ -26,19 +28,25 @@ public class TooltipSystem : MonoBehaviour
         inputModule = FindObjectOfType<InputSystemUIInputModule>();
         instance = this;
     }
+    
 
-    public static void Show(string content, string header = "")
+    public static void ShowCraftingRecipe(CraftingRecipe content, string header = "")
+    {
+        instance.craftingTooltip.SetCraftingRecipe(content);        
+    }
+
+    public static void HideCraftingRecipe()
+    {
+        instance.craftingTooltip.gameObject.SetActive(false);
+    }
+  
+    public static void ShowInformation(string content, string header = "")
     {
         instance.tooltip.SetText(content, header);
         instance.tooltip.gameObject.SetActive(true);
     }
-
-    /*public static void Show(CraftingTooltipData content, string header = "") 
-    {
-        //instance
-    }*/
-
-    public static void Hide()
+    
+    public static void HideInformation()
     {
         instance.tooltip.gameObject.SetActive(false);
     }

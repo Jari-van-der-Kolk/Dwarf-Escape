@@ -6,16 +6,16 @@ using UnityEngine.EventSystems;
 public class CraftingTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public string header;
-    public CraftingTooltipData content;
+    public CraftingRecipe content;
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //TooltipSystem.Show(content, header);
+        TooltipSystem.ShowCraftingRecipe(content, header);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        TooltipSystem.Hide();
+        TooltipSystem.HideCraftingRecipe();
     }
 }
