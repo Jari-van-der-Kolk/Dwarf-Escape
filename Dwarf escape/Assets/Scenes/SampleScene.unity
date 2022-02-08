@@ -2731,8 +2731,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craftingTier: 0
   maxTier: 0
+  useTiers: 0
   craftingRecipeData:
-  - {fileID: 11400000, guid: 449605ad6248c2c47ad9b360ac805a36, type: 2}
   - {fileID: 11400000, guid: 449605ad6248c2c47ad9b360ac805a36, type: 2}
   action:
     m_PersistentCalls:
