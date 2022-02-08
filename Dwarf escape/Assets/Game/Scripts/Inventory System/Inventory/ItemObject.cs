@@ -15,6 +15,11 @@ namespace Inventory
             icon = GetComponent<SpriteRenderer>();
         }
 
+        private void Start()
+        {
+            icon.sprite = referenceItem.icon;
+        }
+
         public void Action()
         {
             InventorySystem.instance.Add(referenceItem);

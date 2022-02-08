@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   displayName: Bone
-  icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
   debugMode: 0
   prefab: {fileID: 8954914671612667337, guid: 5bf7ca44c215b5a48a46589c9297ded7, type: 3}

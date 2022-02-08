@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   displayName: Copper
-  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  icon: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
   debugMode: 0
   prefab: {fileID: 3401748924427365777, guid: 2d236c21913a3b84e9cde09e9d210951, type: 3}

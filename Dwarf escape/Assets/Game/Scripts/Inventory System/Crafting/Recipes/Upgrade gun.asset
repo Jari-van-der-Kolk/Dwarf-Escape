@@ -12,9 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1564217226539140a5267244c9e505f, type: 3}
   m_Name: Upgrade gun
   m_EditorClassIdentifier: 
-  recipe:
-  - name: 
-    item:
-      data: {fileID: 0}
-      stackSize: 0
-    amount: 0
+  requiredItems: []
