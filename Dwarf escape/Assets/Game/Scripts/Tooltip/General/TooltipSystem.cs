@@ -30,7 +30,6 @@ public class TooltipSystem : MonoBehaviour
         inputModule = FindObjectOfType<InputSystemUIInputModule>();
         instance = this;
     }
-    
 
     public static void ShowCraftingRecipe(CraftingRecipe content, string header = "")
     {
@@ -38,9 +37,9 @@ public class TooltipSystem : MonoBehaviour
         instance.craftingTooltip.gameObject.SetActive(true);
     }
 
-    public static void HideCraftingRecipe()
+    public static void HideCraftingRecipe(CraftingRecipe content)
     {
-        instance.craftingTooltip.Deactivate();
+        instance.craftingTooltip.Deactivate(content);
         instance.craftingTooltip.gameObject.SetActive(false);
     }
   
@@ -64,6 +63,4 @@ public class TooltipSystem : MonoBehaviour
 
         instance.tooltipRecipeDatas.Add(tooltipRecipeData);
     }
-    
-   
 }

@@ -6,13 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Recipe")]
 public class CraftingRecipeData : ScriptableObject
 {
+    public string name;
     public Recipe[] requiredItems;
 }
 
 [System.Serializable]
 public class Recipe
 {
-    public string name;
     public InventoryItemData itemData;
     public int amount;
 }

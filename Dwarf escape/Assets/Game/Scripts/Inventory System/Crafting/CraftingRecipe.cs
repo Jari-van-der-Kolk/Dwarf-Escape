@@ -13,34 +13,20 @@ public class CraftingRecipe : MonoBehaviour
     public CraftingRecipeData[] craftingRecipeData;
     [SerializeField] private UnityEvent action;
 
-    private void Awake()
-    {
-        maxTier = craftingRecipeData.Length - 1;
-    }
-
     private void Start()
     {
         craftingTier = 0;
-        
+        maxTier = craftingRecipeData.Length - 1;
     }
 
     public void Craft()
     {
-        
         if (CheckAmount())
         {
             Debug.Log("crafting");
-            action?.Invoke();
             RemoveUsedItems();
+            action?.Invoke();
         }
-        
-    }
-    
-    public bool CheckAmount(InventoryItem item ,int index)
-    {
-        if (item == null) return false;
-        Debug.Log(item.data.displayName + " " + craftingRecipeData[craftingTier].requiredItems[index].amount);
-        return item.stackSize >= craftingRecipeData[craftingTier].requiredItems[index].amount;
     }
 
     public bool CheckAmount()
@@ -54,7 +40,6 @@ public class CraftingRecipe : MonoBehaviour
                 Debug.Log("items missing");
                 return false;
             }
-            return item.stackSize >= craftingRecipeData[craftingTier].requiredItems[i].amount;
         }
         return true;
     }
@@ -63,11 +48,16 @@ public class CraftingRecipe : MonoBehaviour
     {
         for (int i = 0; i < craftingRecipeData[craftingTier].requiredItems.Length; i++)
         {
-            InventoryItem item = InventorySystem.instance.Get(craftingRecipeData[craftingTier].requiredItems[i].itemData);
-            item.RemoveFromStack();
+            for (int j = 0; j < craftingRecipeData[craftingTier].requiredItems[i].amount; j++)
+            {
+                InventoryItem item = InventorySystem.instance.Get(craftingRecipeData[craftingTier].requiredItems[j].itemData);
+                item.RemoveFromStack();
+            }
         }
     }
-    
+
+    public void AddTier() => craftingTier++;
+
 }
 
 

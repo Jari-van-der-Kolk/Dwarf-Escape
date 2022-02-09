@@ -9,9 +9,9 @@ public class GetRecipeDisplayerData : MonoBehaviour
 {
     [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI text;
-    private bool assigned;
+    private bool assigned = false;
 
-    private void Start()
+    private void OnEnable()
     {
         AssignTooltipData();
     }
@@ -20,7 +20,7 @@ public class GetRecipeDisplayerData : MonoBehaviour
     {
         if (assigned == false)
         {
-            TooltipRecipeData tooltipRecipeData = new TooltipRecipeData(image, text);
+            TooltipRecipeData tooltipRecipeData = new TooltipRecipeData(gameObject ,image, text);
             TooltipSystem.SubscribeRecipeDisplayData(tooltipRecipeData);
             assigned = true;
         }
