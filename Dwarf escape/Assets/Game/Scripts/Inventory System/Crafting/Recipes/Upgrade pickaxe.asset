@@ -19,3 +19,9 @@ MonoBehaviour:
   - name: iron
     itemData: {fileID: 11400000, guid: 7a85d2b28e7c5e9439974b66e8e22692, type: 2}
     amount: 1
+  - name: Copper
+    itemData: {fileID: 11400000, guid: a02858712b00b6f4696aa7e0cea8aaef, type: 2}
+    amount: 1
+  - name: Copper
+    itemData: {fileID: 11400000, guid: a02858712b00b6f4696aa7e0cea8aaef, type: 2}
+    amount: 1

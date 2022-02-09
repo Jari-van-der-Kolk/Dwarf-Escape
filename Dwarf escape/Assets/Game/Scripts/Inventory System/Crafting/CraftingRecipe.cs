@@ -7,8 +7,8 @@ using UnityEngine.Events;
 
 public class CraftingRecipe : MonoBehaviour
 {
-    [SerializeField] private int craftingTier;
-    [SerializeField] private int maxTier;
+    public int craftingTier;
+    public int maxTier;
     [SerializeField] private bool useTiers; // activate useTiers if you use the script for upgrading items
     public CraftingRecipeData[] craftingRecipeData;
     [SerializeField] private UnityEvent action;

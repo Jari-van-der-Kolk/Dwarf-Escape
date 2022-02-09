@@ -13,6 +13,8 @@ public class TooltipSystem : MonoBehaviour
 
     public Tooltip tooltip;
     public CraftingTooltip craftingTooltip;
+
+    public List<TooltipRecipeData> tooltipRecipeDatas;
     
     private InputSystemUIInputModule inputModule;
 
@@ -32,11 +34,13 @@ public class TooltipSystem : MonoBehaviour
 
     public static void ShowCraftingRecipe(CraftingRecipe content, string header = "")
     {
-        instance.craftingTooltip.SetCraftingRecipe(content);        
+        instance.craftingTooltip.ShowCraftingRecipe(content);   
+        instance.craftingTooltip.gameObject.SetActive(true);
     }
 
     public static void HideCraftingRecipe()
     {
+        instance.craftingTooltip.Deactivate();
         instance.craftingTooltip.gameObject.SetActive(false);
     }
   
@@ -49,6 +53,16 @@ public class TooltipSystem : MonoBehaviour
     public static void HideInformation()
     {
         instance.tooltip.gameObject.SetActive(false);
+    }
+
+    public static void SubscribeRecipeDisplayData(TooltipRecipeData tooltipRecipeData)
+    {
+        if (instance.tooltipRecipeDatas == null)
+        {
+            instance.tooltipRecipeDatas = new List<TooltipRecipeData>();
+        }
+
+        instance.tooltipRecipeDatas.Add(tooltipRecipeData);
     }
     
    

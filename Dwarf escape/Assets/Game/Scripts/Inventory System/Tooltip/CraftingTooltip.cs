@@ -12,30 +12,27 @@ public class CraftingTooltip : MonoBehaviour
     public Transform contentField;
     [SerializeField] private GameObject craftingInformationPrefab;
 
-    private List<Image> craftingImages;
-
-    
     [HideInInspector] public LayoutElement layoutElement;
     
+    public RectTransform rectTransform;
+
     public int characterWrapLimit;
 
-    public RectTransform rectTransform;
-    
+    private int i;
     
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
     }
-    
-    
+
+    private void Start()
+    {
+        TooltipSystem.instance.craftingTooltip.gameObject.SetActive(false);
+    }
+
+
     private void Update()
     {
-        if (Application.isEditor)
-        {
-            int headerLength = headerField.text.Length;
-
-            layoutElement.enabled = (headerLength > characterWrapLimit) ? true : false;
-        }
 
         Vector2 position = TooltipSystem.mousePosition;
         float pivotX = position.x / Screen.width;
@@ -46,32 +43,60 @@ public class CraftingTooltip : MonoBehaviour
     }
 
 
-    public void SetCraftingRecipe(CraftingRecipe recipe)
+    public void ShowCraftingRecipe(CraftingRecipe recipe)
     {
+        //check if there are not enough images for the recipe
         CheckOutOffBounds(recipe);
+
+        
         Activate(recipe);
     }
 
     private void CheckOutOffBounds(CraftingRecipe recipe)
     {
-        if (recipe.craftingRecipeData.Length > contentField.childCount)
+        if (recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length > contentField.childCount)
         {
-            Instantiate(craftingInformationPrefab, contentField);
+
+            int index = recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length - contentField.childCount;
+            Debug.Log("??");
+            CreateDisplayersNeeded(index);
         }
     }
 
     private void Activate(CraftingRecipe recipe)
     {
-        for (int i = 0; i < recipe.craftingRecipeData.Length; i++)
+        
+        //Debug.Log( TooltipSystem.instance.tooltipRecipeDatas.Count);
+
+        while (i < recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length)
         {
-                 
+//            TooltipSystem.instance.tooltipRecipeDatas[i].icon.sprite = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData.icon;
+            //Debug.Log(i);
+            i++;
         }
+        //Debug.Log( TooltipSystem.instance.tooltipRecipeDatas.Count + " " + recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length);
+
+        // for (int i = 0; i < recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length; i++)
+        // {
+        //     
+        // }
     }
 
     public void Deactivate()
     {
         
     }
+
+    private void CreateDisplayersNeeded(int index)
+    {
+        for (int i = 0; i < index; i++)
+        {
+            Debug.Log(i);
+            var obj = Instantiate(craftingInformationPrefab, contentField);
+            obj.GetComponent<GetRecipeDisplayerData>().AssignTooltipData();
+        }     
+    }
+  
     
     
 }
