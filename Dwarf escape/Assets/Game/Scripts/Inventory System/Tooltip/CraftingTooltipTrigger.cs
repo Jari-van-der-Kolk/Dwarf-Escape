@@ -17,7 +17,7 @@ public class CraftingTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.ShowCraftingRecipe(content, header);
+        TooltipSystem.ShowCraftingRecipe(content ,header);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -36,6 +36,5 @@ public class CraftingTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
         {
             TooltipSystem.HideCraftingRecipe(content);
         }
-        //OnPointerExit(_pointerEventData);       
     }
 }

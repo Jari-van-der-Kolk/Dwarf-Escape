@@ -31,10 +31,15 @@ public class CraftingTooltip : MonoBehaviour
     {
         if (!upgrageInfoArea.activeInHierarchy)
         {
-            Debug.Log("yeet ");
+            Debug.Log("yeet");
             gameObject.SetActive(false);
         }
         
+        UpdatePosition();
+    }
+
+    public void UpdatePosition()
+    {
         Vector2 position = TooltipSystem.mousePosition;
         float pivotX = position.x / Screen.width;
         float pivotY = position.y / Screen.height;
@@ -42,30 +47,6 @@ public class CraftingTooltip : MonoBehaviour
         _rectTransform.pivot = new Vector2(pivotX, pivotY); 
         transform.position = position;
     }
-
-   
-    public void Activate(CraftingRecipe recipe)
-    {
-        
-        for (int i = 0; i <  recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length; i++)
-        {
-            string requirementDisplay;
-            headerField.text = recipe.craftingRecipeData[recipe.craftingTier].name;
-            TooltipSystem.instance.tooltipRecipeDatas[i].gameObject.SetActive(true);
-            TooltipSystem.instance.tooltipRecipeDatas[i].image.sprite = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData.icon;
-            if (InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData) != null)
-            {
-                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
-                TooltipSystem.instance.tooltipRecipeDatas[i].displayText.text = 
-                    InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData).stackSize + "/" + requirementDisplay;
-            }
-            else
-            {
-                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
-                TooltipSystem.instance.tooltipRecipeDatas[i].displayText.text = 0 + "/" + requirementDisplay;
-            }
-        }
-        
-    }
+    
     
 }

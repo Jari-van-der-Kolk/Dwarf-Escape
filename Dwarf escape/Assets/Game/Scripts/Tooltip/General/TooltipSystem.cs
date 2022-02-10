@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
@@ -8,16 +9,15 @@ using UnityEngine.UI;
 public class TooltipSystem : MonoBehaviour
 {
     public static TooltipSystem instance;
-
     public Tooltip tooltip;
     public CraftingTooltip craftingTooltip;
 
-    public List<GetRecipeDisplayerData> tooltipRecipeDatas;
-    
-    private InputSystemUIInputModule inputModule;
 
     [SerializeField] private GameObject craftingInformationPrefab;
     [SerializeField] private Transform contentField;
+    
+    [HideInInspector]public List<GetRecipeDisplayerData> tooltipRecipeDatas;
+    private InputSystemUIInputModule inputModule;
 
     
     public static Vector2 mousePosition
@@ -33,12 +33,10 @@ public class TooltipSystem : MonoBehaviour
 
     public static void ShowCraftingRecipe(CraftingRecipe content, string header = "")
     {
-        for (int i = 0; i < instance.contentField.childCount; i++)
-        {
-            instance.tooltipRecipeDatas[i].gameObject.SetActive(false);
-        }
+        instance.Deactivate();
+        instance.craftingTooltip.UpdatePosition();
         instance.CheckOutOffBounds(content);
-        instance.craftingTooltip.Activate(content);   
+        instance.Activate(content, header);   
         instance.craftingTooltip.gameObject.SetActive(true);
     }
 
@@ -63,11 +61,11 @@ public class TooltipSystem : MonoBehaviour
         if (recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length > contentField.childCount)
         {
             int index = recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length - contentField.childCount;
-            CreateDisplayersNeeded(index);
+            CreateDisplay(index);
         }
 
     }
-    private void CreateDisplayersNeeded(int index)
+    private void CreateDisplay(int index)
     {
         for (int i = 0; i < index; i++)
         {
@@ -84,5 +82,35 @@ public class TooltipSystem : MonoBehaviour
         }
 
         instance.tooltipRecipeDatas.Add(tooltipRecipeData);
+    }
+    
+    private void Activate(CraftingRecipe recipe, string header = "")
+    {
+        for (int i = 0; i <  recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length; i++)
+        {
+            string requirementDisplay;
+            instance.craftingTooltip.headerField.text = recipe.craftingRecipeData[recipe.craftingTier].name;
+            instance.tooltipRecipeDatas[i].gameObject.SetActive(true);
+            instance.tooltipRecipeDatas[i].image.sprite = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData.icon;
+            if (InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData) != null)
+            {
+                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
+                instance.tooltipRecipeDatas[i].displayText.text = 
+                    InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData).stackSize + "/" + requirementDisplay;
+            }
+            else
+            {
+                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
+                instance.tooltipRecipeDatas[i].displayText.text = 0 + "/" + requirementDisplay;
+            }
+        }
+    }
+
+    private void Deactivate()
+    {
+        for (int i = 0; i < instance.contentField.childCount; i++)
+        {
+            instance.tooltipRecipeDatas[i].gameObject.SetActive(false);
+        }
     }
 }
