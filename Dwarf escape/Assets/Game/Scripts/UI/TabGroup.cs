@@ -22,20 +22,31 @@ public class TabGroup : MonoBehaviour
     private void Awake()
     {
         _defaultInputActions = new DefaultInputActions();
-        _defaultInputActions.UI.Enable();
         _defaultInputActions.UI.Navigate.performed += NextTab;
-
+        StartActiveTab();
     }
     
     private void Start()
     {
-        StartActiveTab();
+       // StartActiveTab();
+    }
+
+    private void OnEnable()
+    {
+        _defaultInputActions.UI.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _defaultInputActions.UI.Disable();
+       // SetActive(0);
     }
 
     private void NextTab(InputAction.CallbackContext context)
     {
         if (_defaultInputActions.UI.Navigate.ReadValue<Vector2>() == Vector2.up)
         {
+            Debug.Log(selectedTab);
             int nextTabIndex = selectedTab.transform.GetSiblingIndex() - 1;
             if (nextTabIndex < 0)
             {
@@ -55,12 +66,7 @@ public class TabGroup : MonoBehaviour
             SetActive(nextTabIndex);
         }
     }
-
-    private void OnDisable()
-    {
-        SetActive(0);
-    }
-
+    
     public void StartActiveTab()
     {
         if (selectedTab == null)
@@ -69,7 +75,7 @@ public class TabGroup : MonoBehaviour
         }
     }
     
-    public void SetActive(TabButton tabButton)
+    private void SetActive(TabButton tabButton)
     {
         foreach (TabButton t in tabButtons)
         {
@@ -85,7 +91,7 @@ public class TabGroup : MonoBehaviour
         }
     }
 
-    private void SetActive(int siblingIndex)
+    public void SetActive(int siblingIndex)
     {
         foreach (var t in tabButtons)
         {
@@ -96,7 +102,7 @@ public class TabGroup : MonoBehaviour
             }
         }
     }
-    
+
     public void Subscribe(TabButton button)
     {
         if (tabButtons == null)
@@ -142,6 +148,7 @@ public class TabGroup : MonoBehaviour
             }
             else
             {
+                if(!objectToSwap[i].gameObject.activeInHierarchy) continue;
                 objectToSwap[i].SetActive(false);
             }
         }

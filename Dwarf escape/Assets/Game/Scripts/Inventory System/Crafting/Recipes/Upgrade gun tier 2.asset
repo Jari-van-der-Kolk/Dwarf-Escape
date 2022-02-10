@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1564217226539140a5267244c9e505f, type: 3}
   m_Name: Upgrade gun tier 2
   m_EditorClassIdentifier: 
+  name: Upgrade gun
   requiredItems:
-  - name: Iron
-    itemData: {fileID: 11400000, guid: 7a85d2b28e7c5e9439974b66e8e22692, type: 2}
+  - itemData: {fileID: 11400000, guid: 7a85d2b28e7c5e9439974b66e8e22692, type: 2}
     amount: 0
-  - name: Bone
-    itemData: {fileID: 11400000, guid: ad24ae8f66211404bb48c55b120c67be, type: 2}
+  - itemData: {fileID: 11400000, guid: ad24ae8f66211404bb48c55b120c67be, type: 2}
     amount: 4

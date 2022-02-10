@@ -29,7 +29,13 @@ public class CraftingTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPoin
     {
         TooltipSystem.HideCraftingRecipe(content);
     }
-    
 
-    
+    private void OnDisable()
+    {
+        if (TooltipSystem.instance != null)
+        {
+            TooltipSystem.HideCraftingRecipe(content);
+        }
+        //OnPointerExit(_pointerEventData);       
+    }
 }

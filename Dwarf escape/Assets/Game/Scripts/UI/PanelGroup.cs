@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PanelGroup : MonoBehaviour
 {
-    
-    
     public GameObject[] panels;
 
     public TabGroup tabGroup;

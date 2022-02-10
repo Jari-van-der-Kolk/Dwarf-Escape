@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public class GetRecipeDisplayerData : MonoBehaviour
 {
-    [SerializeField] private Image image;
-    [SerializeField] private TextMeshProUGUI text;
+    public Image image;
+    public TextMeshProUGUI displayText;
+    public GameObject recipeDataGameObject;
     private bool assigned = false;
 
     private void OnEnable()
@@ -20,8 +21,10 @@ public class GetRecipeDisplayerData : MonoBehaviour
     {
         if (assigned == false)
         {
-            TooltipRecipeData tooltipRecipeData = new TooltipRecipeData(gameObject ,image, text);
-            TooltipSystem.SubscribeRecipeDisplayData(tooltipRecipeData);
+            recipeDataGameObject = gameObject;
+            displayText = GetComponentInChildren<TextMeshProUGUI>();
+            image.GetComponentInChildren<Image>();
+            TooltipSystem.SubscribeRecipeDisplayData(this);
             assigned = true;
         }
        

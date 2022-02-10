@@ -272,7 +272,7 @@ MonoBehaviour:
   tabIdle: {r: 0, g: 0, b: 0, a: 0.09803922}
   tabHover: {r: 0, g: 0, b: 0, a: 0.42745098}
   tabActive: {r: 0, g: 0, b: 0, a: 0.7529412}
-  selectedTab: {fileID: 0}
+  selectedTab: {fileID: 161176699}
   objectToSwap:
   - {fileID: 1394475137}
   - {fileID: 253098914}
@@ -661,10 +661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headerField: {fileID: 1993457228}
-  craftingInformationPrefab: {fileID: 4247046586499251203, guid: b0fb14b1140703648b2e81b40ce8906d, type: 3}
-  contentField: {fileID: 1638448353}
+  upgrageInfoArea: {fileID: 2068886313}
   layoutElement: {fileID: 0}
-  rectTransform: {fileID: 91600590}
   characterWrapLimit: 0
 --- !u!1 &92726154
 GameObject:
@@ -3690,6 +3688,8 @@ MonoBehaviour:
   tooltip: {fileID: 89090373}
   craftingTooltip: {fileID: 91600597}
   tooltipRecipeDatas: []
+  craftingInformationPrefab: {fileID: 4247046586499251203, guid: b0fb14b1140703648b2e81b40ce8906d, type: 3}
+  contentField: {fileID: 1638448353}
 --- !u!114 &1295194546
 MonoBehaviour:
   m_ObjectHideFlags: 0

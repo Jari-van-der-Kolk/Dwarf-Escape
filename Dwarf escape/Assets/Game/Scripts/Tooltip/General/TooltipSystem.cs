@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
@@ -14,10 +12,12 @@ public class TooltipSystem : MonoBehaviour
     public Tooltip tooltip;
     public CraftingTooltip craftingTooltip;
 
-    public List<TooltipRecipeData> tooltipRecipeDatas;
+    public List<GetRecipeDisplayerData> tooltipRecipeDatas;
     
     private InputSystemUIInputModule inputModule;
 
+    [SerializeField] private GameObject craftingInformationPrefab;
+    [SerializeField] private Transform contentField;
 
     
     public static Vector2 mousePosition
@@ -33,7 +33,12 @@ public class TooltipSystem : MonoBehaviour
 
     public static void ShowCraftingRecipe(CraftingRecipe content, string header = "")
     {
-        instance.craftingTooltip.ShowCraftingRecipe(content);   
+        for (int i = 0; i < instance.contentField.childCount; i++)
+        {
+            instance.tooltipRecipeDatas[i].gameObject.SetActive(false);
+        }
+        instance.CheckOutOffBounds(content);
+        instance.craftingTooltip.Activate(content);   
         instance.craftingTooltip.gameObject.SetActive(true);
     }
 
@@ -54,11 +59,29 @@ public class TooltipSystem : MonoBehaviour
         instance.tooltip.gameObject.SetActive(false);
     }
 
-    public static void SubscribeRecipeDisplayData(TooltipRecipeData tooltipRecipeData)
+    private void CheckOutOffBounds(CraftingRecipe recipe)
+    {
+        if (recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length > contentField.childCount)
+        {
+            int index = recipe.craftingRecipeData[recipe.craftingTier].requiredItems.Length - contentField.childCount;
+            CreateDisplayersNeeded(index);
+        }
+
+    }
+    private void CreateDisplayersNeeded(int index)
+    {
+        for (int i = 0; i < index; i++)
+        {
+            var obj = Instantiate(craftingInformationPrefab, contentField);
+            obj.GetComponent<GetRecipeDisplayerData>().AssignTooltipData();
+        }     
+    }
+
+    public static void SubscribeRecipeDisplayData(GetRecipeDisplayerData tooltipRecipeData)
     {
         if (instance.tooltipRecipeDatas == null)
         {
-            instance.tooltipRecipeDatas = new List<TooltipRecipeData>();
+            instance.tooltipRecipeDatas = new List<GetRecipeDisplayerData>();
         }
 
         instance.tooltipRecipeDatas.Add(tooltipRecipeData);
