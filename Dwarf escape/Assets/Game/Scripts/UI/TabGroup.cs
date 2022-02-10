@@ -28,7 +28,7 @@ public class TabGroup : MonoBehaviour
     
     private void Start()
     {
-       // StartActiveTab();
+        StartActiveTab();
     }
 
     private void OnEnable()
@@ -39,7 +39,7 @@ public class TabGroup : MonoBehaviour
     private void OnDisable()
     {
         _defaultInputActions.UI.Disable();
-       // SetActive(0);
+        SetActive(0);
     }
 
     private void NextTab(InputAction.CallbackContext context)

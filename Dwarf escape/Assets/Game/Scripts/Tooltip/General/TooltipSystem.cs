@@ -44,7 +44,6 @@ public class TooltipSystem : MonoBehaviour
 
     public static void HideCraftingRecipe(CraftingRecipe content)
     {
-        instance.craftingTooltip.Deactivate(content);
         instance.craftingTooltip.gameObject.SetActive(false);
     }
   

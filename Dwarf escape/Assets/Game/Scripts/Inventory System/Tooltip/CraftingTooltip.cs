@@ -31,6 +31,7 @@ public class CraftingTooltip : MonoBehaviour
     {
         if (!upgrageInfoArea.activeInHierarchy)
         {
+            Debug.Log("yeet ");
             gameObject.SetActive(false);
         }
         
@@ -67,8 +68,4 @@ public class CraftingTooltip : MonoBehaviour
         
     }
     
-    public void Deactivate(CraftingRecipe recipe)
-    {
-        Debug.Log(TooltipSystem.instance.tooltipRecipeDatas[0]);
-    }
 }

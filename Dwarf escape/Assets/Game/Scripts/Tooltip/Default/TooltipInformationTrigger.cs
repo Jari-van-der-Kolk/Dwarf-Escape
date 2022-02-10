@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,5 +21,12 @@ public class TooltipInformationTrigger : MonoBehaviour, IPointerEnterHandler, IP
         TooltipSystem.HideInformation();
     }
 
+    private void OnDisable()
+    {
+        if (TooltipSystem.instance != null)
+        {
+            TooltipSystem.HideInformation();
+        }
+    }
 } 
    
