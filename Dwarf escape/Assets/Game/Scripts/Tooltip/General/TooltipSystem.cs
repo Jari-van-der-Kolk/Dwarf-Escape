@@ -94,14 +94,16 @@ public class TooltipSystem : MonoBehaviour
             instance.tooltipRecipeDatas[i].image.sprite = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData.icon;
             if (InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData) != null)
             {
-                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
+                requirementDisplay = string.Format(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString());
                 instance.tooltipRecipeDatas[i].displayText.text = 
                     InventorySystem.instance.Get(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData).stackSize + "/" + requirementDisplay;
             }
             else
             {
-                requirementDisplay = recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount.ToString();
-                instance.tooltipRecipeDatas[i].displayText.text = 0 + "/" + requirementDisplay;
+                requirementDisplay =
+                    string.Format(recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].amount + " " +
+                                  recipe.craftingRecipeData[recipe.craftingTier].requiredItems[i].itemData.displayName);
+                instance.tooltipRecipeDatas[i].displayText.text = string.Format(0 + "/" + requirementDisplay);
             }
         }
     }

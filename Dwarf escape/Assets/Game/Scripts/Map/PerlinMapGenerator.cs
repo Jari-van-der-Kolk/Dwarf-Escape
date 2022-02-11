@@ -10,8 +10,8 @@ public class PerlinMapGenerator : MonoBehaviour
 
 	[SerializeField] private GameObject[] tileTypes;
 	
-	[SerializeField] int mapWidth = 160;
-	[SerializeField] int mapHeight = 90;
+	public int mapWidth = 160;
+	public int mapHeight = 90;
 
 	// recommend 4 to 20
 	[SerializeField]float magnification = 7.0f;
