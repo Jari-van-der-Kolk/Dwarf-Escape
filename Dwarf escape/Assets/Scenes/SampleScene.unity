@@ -272,7 +272,7 @@ MonoBehaviour:
   tabIdle: {r: 0, g: 0, b: 0, a: 0.09803922}
   tabHover: {r: 0, g: 0, b: 0, a: 0.42745098}
   tabActive: {r: 0, g: 0, b: 0, a: 0.7529412}
-  selectedTab: {fileID: 161176699}
+  selectedTab: {fileID: 0}
   objectToSwap:
   - {fileID: 1394475137}
   - {fileID: 253098914}
@@ -3801,7 +3801,6 @@ Transform:
   m_Children:
   - {fileID: 1483172981}
   - {fileID: 1295194548}
-  - {fileID: 1805757977}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4680,7 +4679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4937d604bae50545972ace718529f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileTypes: []
+  tileTypes:
+  - {fileID: 6997854173165040921, guid: adb56c1b05a6d464c8305b1a06b5d04c, type: 3}
   mapWidth: 160
   mapHeight: 90
   magnification: 7
@@ -5349,8 +5349,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1311345906}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1805757978
 MonoBehaviour:
