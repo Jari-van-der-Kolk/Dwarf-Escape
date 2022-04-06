@@ -21,7 +21,7 @@ namespace JariUnityUISystem
 
         public void Activate()
         {
-            activateEvent?.Invoke();
+            activateEvent?.Invoke(); 
             panel.SetActive(true);
             activated = true;
         }

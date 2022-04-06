@@ -19,8 +19,7 @@ namespace Player
         {
             Vector2 mousePos = Mouse.current.position.ReadValue() - (Vector2)_camera.WorldToScreenPoint(transform.position);
             angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); 
         }
     }
 }

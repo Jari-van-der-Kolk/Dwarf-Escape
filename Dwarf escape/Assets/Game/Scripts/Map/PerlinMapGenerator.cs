@@ -12,14 +12,14 @@ public class PerlinMapGenerator : MonoBehaviour
 	
 	public int mapWidth = 160;
 	public int mapHeight = 90;
-
+	
 	// recommend 4 to 20
 	[SerializeField]float magnification = 7.0f;
 
 	int x_offset = 0; // <- +>
 	int y_offset = 0; // v- +^
 
-    void Start()
+    void Awake()
     {
         CreateTileset();
         CreateTileGroups();

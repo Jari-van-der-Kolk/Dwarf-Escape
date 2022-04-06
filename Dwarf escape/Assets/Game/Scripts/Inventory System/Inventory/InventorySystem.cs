@@ -42,6 +42,8 @@ namespace Inventory
             return null;
         }
 
+        
+        //maak een AddMaterial method en een AddEquipable method
         public void Add(InventoryItemData referenceData)
         {
             if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
@@ -53,6 +55,7 @@ namespace Inventory
                 InventoryItem newItem = new InventoryItem(referenceData);
                 inventory.Add(newItem);
                 _itemDictionary.Add(referenceData, newItem);
+                InventorySlotManager.instance.Add(newItem);
             }
         }
 

@@ -9,6 +9,8 @@ namespace Player
 
     public class Movement : MonoBehaviour
     {
+        public static Movement instance;
+        
         [SerializeField] private float moveSpeed;
         [HideInInspector] public Transform playerTransform;
 
@@ -16,7 +18,9 @@ namespace Player
         private DefaultInputActions playerController;
         
         private void Awake()
-        { 
+        {
+            instance = this;
+            
             rb = GetComponent<Rigidbody2D>();
 
             playerController = new DefaultInputActions();

@@ -11,7 +11,7 @@ namespace JariUnityUISystem
         [SerializeField] private List<MenuNode> _selectedMenus;
         private MenuNode _lowestPriority;
         
-        private void Awake()
+        private void Start()
         {
             AddLowestPriority();
             DeactivateAll();
@@ -82,6 +82,7 @@ namespace JariUnityUISystem
             {
                 menuNode.Activate();
                 _selectedMenus.Add(menuNode);
+                   
             } 
         }
 

@@ -23,13 +23,12 @@ public class CraftingRecipe : MonoBehaviour
     {
         if (CheckAmount())
         {
-            Debug.Log("crafting");
             RemoveUsedItems();
             action?.Invoke();
         }
     }
 
-    public bool CheckAmount()
+    private bool CheckAmount()
     {
         int requirementAmount = craftingRecipeData[craftingTier].requiredItems.Length;
         for (int i = 0; i < requirementAmount; i++)

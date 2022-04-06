@@ -9,8 +9,6 @@ using UnityEngine.UI;
 public class CraftingTooltip : MonoBehaviour
 {
     public TextMeshProUGUI headerField;
-    [SerializeField] private GameObject upgrageInfoArea;
-
 
     [HideInInspector] public LayoutElement layoutElement;
     private RectTransform _rectTransform;
@@ -29,12 +27,6 @@ public class CraftingTooltip : MonoBehaviour
     
     private void Update()
     {
-        if (!upgrageInfoArea.activeInHierarchy)
-        {
-            Debug.Log("yeet");
-            gameObject.SetActive(false);
-        }
-        
         UpdatePosition();
     }
 

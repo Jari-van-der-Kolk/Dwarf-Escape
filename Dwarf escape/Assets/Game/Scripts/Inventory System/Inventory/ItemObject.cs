@@ -23,6 +23,9 @@ namespace Inventory
         public void Action()
         {
             InventorySystem.instance.Add(referenceItem);
+            // zorg er hier voor dat er data naar de inventory slot manager word gegooit.
+            
+            
             //deactivate the object you are picking up
             Destroy(gameObject);
         }

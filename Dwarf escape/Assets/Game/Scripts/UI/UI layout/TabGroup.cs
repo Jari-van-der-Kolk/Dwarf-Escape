@@ -46,7 +46,6 @@ public class TabGroup : MonoBehaviour
     {
         if (_defaultInputActions.UI.Navigate.ReadValue<Vector2>() == Vector2.up)
         {
-            Debug.Log(selectedTab);
             int nextTabIndex = selectedTab.transform.GetSiblingIndex() - 1;
             if (nextTabIndex < 0)
             {
