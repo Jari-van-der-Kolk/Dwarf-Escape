@@ -38,7 +38,6 @@ namespace Inventory
             {
                 return value;
             }
-
             return null;
         }
 
@@ -49,13 +48,14 @@ namespace Inventory
             if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
                 value.AddToStack();
+                
             }
             else
             {
                 InventoryItem newItem = new InventoryItem(referenceData);
                 inventory.Add(newItem);
                 _itemDictionary.Add(referenceData, newItem);
-                InventorySlotManager.instance.Add(newItem);
+                EquipmentSlotManager.instance.Add(newItem);
             }
         }
 
@@ -69,7 +69,6 @@ namespace Inventory
                 {
                     inventory.Remove(value);
                     _itemDictionary.Remove(referenceData);
-
                 }
             }
         }

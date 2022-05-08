@@ -27,7 +27,6 @@ namespace Player
         }
         private void Mine(InputAction.CallbackContext context)
         {
-            Debug.Log("fuck you");
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, mineDistance, mask);
             if (hit.collider != null)
                 hit.collider.GetComponent<IHitable>().Hit(hitAmount);

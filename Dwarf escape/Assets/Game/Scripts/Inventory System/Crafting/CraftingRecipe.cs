@@ -17,14 +17,23 @@ public class CraftingRecipe : MonoBehaviour
     {
         craftingTier = 0;
         maxTier = craftingRecipeData.Length - 1;
+        Debug.Log(maxTier);
     }
 
     public void Craft()
     {
         if (CheckAmount())
         {
-            RemoveUsedItems();
+            RemoveCraftingItems();
             action?.Invoke();
+        }
+    }
+
+    public void Upgrade()
+    {
+        if (CheckAmount())
+        {
+            
         }
     }
 
@@ -43,19 +52,34 @@ public class CraftingRecipe : MonoBehaviour
         return true;
     }
 
-    private void RemoveUsedItems()
+    private void RemoveUpgradeItems()
+    {
+        /*for (int i = 0; i < craftingRecipeData[0].requiredItems[0]; i++)
+        {
+            
+        }*/
+    }
+
+    private void RemoveCraftingItems()
     {
         for (int i = 0; i < craftingRecipeData[craftingTier].requiredItems.Length; i++)
         {
             for (int j = 0; j < craftingRecipeData[craftingTier].requiredItems[i].amount; j++)
             {
-                InventoryItem item = InventorySystem.instance.Get(craftingRecipeData[craftingTier].requiredItems[j].itemData);
+                InventoryItem item = InventorySystem.instance.Get(craftingRecipeData[craftingTier].requiredItems[i].itemData);
                 item.RemoveFromStack();
+                //InventorySlotManager.instance.Remove();
             }
         }
     }
 
-    public void AddTier() => craftingTier++;
+    public void AddTier()
+    {
+        if (craftingTier < maxTier)
+        { 
+            craftingTier++;
+        }
+    }
 
 }
 

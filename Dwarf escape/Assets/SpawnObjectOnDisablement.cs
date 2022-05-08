@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class SpawnObjectOnDisablement : MonoBehaviour
@@ -12,7 +13,7 @@ public class SpawnObjectOnDisablement : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Instantiate(prefab);
+            //Instantiate(prefab, transform.position, quaternion.identity);
         }
     }
 }
