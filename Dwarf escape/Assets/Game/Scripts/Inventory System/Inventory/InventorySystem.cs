@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,7 +49,7 @@ namespace Inventory
             if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
                 value.AddToStack();
-                
+                EquipmentSlotManager.updateValues?.Invoke(this, EventArgs.Empty);
             }
             else
             {

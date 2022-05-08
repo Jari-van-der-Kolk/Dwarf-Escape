@@ -17,7 +17,6 @@ public class CraftingRecipe : MonoBehaviour
     {
         craftingTier = 0;
         maxTier = craftingRecipeData.Length - 1;
-        Debug.Log(maxTier);
     }
 
     public void Craft()

@@ -10,38 +10,31 @@ using UnityEngine.UI;
 public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [HideInInspector] public InventoryItem referenceData;
-    private TextMeshProUGUI counterText;
+    [SerializeField] private TextMeshProUGUI _counterText;
     
-    private RectTransform m_RectTransform;
+    private RectTransform _rectTransform;
     
-    private GameObject m_DraggingIcon;
-    private RectTransform m_DraggingPlane;
-    private CanvasGroup m_DraggingCanvasGroup;
+    private GameObject _draggingIcon;
+    private RectTransform _draggingPlane;
+    private CanvasGroup _draggingCanvasGroup;
     
-    private CanvasGroup m_CanvasGroup;
+    private CanvasGroup _canvasGroup;
     
     public bool dragOnSurfaces = true;
-    private void OnEnable()
-    {
-        if (transform.childCount > 0)
-        {
-            TransformToOrigin();
-            
-        }
-    }
 
     public void Init(InventoryItem referenceData, TextMeshProUGUI counterText)
     {
         this.referenceData = referenceData;
-        this.counterText = counterText;
+        _counterText = counterText;
 
-        this.counterText.text = referenceData.stackSize.ToString();
-        m_CanvasGroup = GetComponent<CanvasGroup>();
-        m_RectTransform = GetComponent<RectTransform>();
+        _counterText.text = referenceData.stackSize.ToString();
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _rectTransform = GetComponent<RectTransform>();
         GetComponent<Image>().sprite = referenceData.data.icon;
-        m_RectTransform.position = m_RectTransform.parent.position;
+        _rectTransform.position = _rectTransform.parent.position;
         
-        
+        EquipmentSlotManager.updateValues += UpdateValue;
+
     }
     
     public void OnBeginDrag(PointerEventData eventData)
@@ -50,51 +43,51 @@ public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         if (canvas == null)
             return;
 
-        m_DraggingIcon = Instantiate(gameObject, canvas.transform, false);
-        m_DraggingIcon.transform.SetAsLastSibling();
-        m_DraggingIcon.GetComponent<Image>().SetNativeSize();
+        _draggingIcon = Instantiate(gameObject, canvas.transform, false);
+        _draggingIcon.transform.SetAsLastSibling();
+        _draggingIcon.GetComponent<Image>().SetNativeSize();
         
-        m_DraggingCanvasGroup = m_DraggingIcon.GetComponent<CanvasGroup>();
-        m_DraggingCanvasGroup.blocksRaycasts = false;
+        _draggingCanvasGroup = _draggingIcon.GetComponent<CanvasGroup>();
+        _draggingCanvasGroup.blocksRaycasts = false;
         
         if (dragOnSurfaces)
-            m_DraggingPlane = transform as RectTransform;
+            _draggingPlane = transform as RectTransform;
         else
-            m_DraggingPlane = canvas.transform as RectTransform;
+            _draggingPlane = canvas.transform as RectTransform;
 
         SetDraggedPosition(eventData);
 
-        m_CanvasGroup.alpha = .6f;
-        m_CanvasGroup.blocksRaycasts = false;
+        _canvasGroup.alpha = .6f;
+        _canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (m_DraggingIcon != null)
+        if (_draggingIcon != null)
             SetDraggedPosition(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        m_CanvasGroup.alpha = 1f;
-        m_CanvasGroup.blocksRaycasts = true;
+        _canvasGroup.alpha = 1f;
+        _canvasGroup.blocksRaycasts = true;
         
-        m_DraggingCanvasGroup.blocksRaycasts = true;
+        _draggingCanvasGroup.blocksRaycasts = true;
         
-        if (m_DraggingIcon != null)
-            Destroy(m_DraggingIcon);
+        if (_draggingIcon != null)
+            Destroy(_draggingIcon);
     }
     private void SetDraggedPosition(PointerEventData data)
     {
         if (dragOnSurfaces && data.pointerEnter != null && data.pointerEnter.transform as RectTransform != null)
-            m_DraggingPlane = data.pointerEnter.transform as RectTransform;
+            _draggingPlane = data.pointerEnter.transform as RectTransform;
 
-        var rt = m_DraggingIcon.GetComponent<RectTransform>();
+        var rt = _draggingIcon.GetComponent<RectTransform>();
         Vector3 globalMousePos;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(m_DraggingPlane, data.position, data.pressEventCamera, out globalMousePos))
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_draggingPlane, data.position, data.pressEventCamera, out globalMousePos))
         {
             rt.position = globalMousePos;
-            rt.rotation = m_DraggingPlane.rotation;
+            rt.rotation = _draggingPlane.rotation;
         }
     }
     
@@ -115,14 +108,11 @@ public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         return comp;
     }
 
-    private void TransformToOrigin()
+    private void UpdateValue(object sender, EventArgs e)
     {
-        m_DraggingPlane = transform.GetComponentInParent<EquipmentSlot>().transform as RectTransform;
-    }
-
-    public void UpdateValue()
-    {
-        counterText.text = referenceData.stackSize.ToString();
+        Debug.Log(_counterText);
+        Debug.Log(referenceData);
+        _counterText.text = referenceData.stackSize.ToString();
     }
     
 }

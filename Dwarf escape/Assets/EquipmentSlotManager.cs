@@ -13,8 +13,8 @@ public class  EquipmentSlotManager : MonoBehaviour
     public static EquipmentSlotManager instance;
 
     [SerializeField] private List<EquipmentSlot> equipmentSlots;
-    
 
+    public static EventHandler updateValues;
 
     private Vector3 _mainPos;
 
