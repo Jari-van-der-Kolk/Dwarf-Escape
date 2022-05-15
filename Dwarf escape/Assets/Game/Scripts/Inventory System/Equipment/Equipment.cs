@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [HideInInspector] public InventoryItem referenceData;
-    [SerializeField] private TextMeshProUGUI _counterText;
+     private TextMeshProUGUI _counterText;
     
     private RectTransform _rectTransform;
     
@@ -110,8 +110,6 @@ public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
 
     private void UpdateValue(object sender, EventArgs e)
     {
-        Debug.Log(_counterText);
-        Debug.Log(referenceData);
         _counterText.text = referenceData.stackSize.ToString();
     }
     

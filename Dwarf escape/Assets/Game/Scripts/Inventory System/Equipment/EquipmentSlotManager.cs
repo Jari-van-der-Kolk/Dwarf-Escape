@@ -31,13 +31,14 @@ public class  EquipmentSlotManager : MonoBehaviour
         }
         else if (instance != null)
         {
+            Debug.LogWarning("hierarchy has two or more of these components");;
             Destroy(this);
         }
         
         for (int i = 0; i < transform.childCount; i++)
         {
-            var foo = transform.GetChild(i).GetComponent<EquipmentSlot>();
-            equipmentSlots.Add(foo);
+            var equipmentSlotMember = transform.GetChild(i).GetComponent<EquipmentSlot>();
+            equipmentSlots.Add(equipmentSlotMember);
         }
 
     }
@@ -57,10 +58,4 @@ public class  EquipmentSlotManager : MonoBehaviour
             }
         }
     }
-
-    public void AddValue(InventoryItem referenceData)
-    {
-       
-    }
-    
 }

@@ -13,24 +13,17 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
     
     public void OnDrop(PointerEventData eventData)
     {
-        var foo = eventData.pointerDrag.GetComponent<Equipment>();
-        if (foo != null && HasChild() == false)
+        var grabbedObject = eventData.pointerDrag.GetComponent<Equipment>();
+        if (grabbedObject != null && HasChild() == false)
         {
             eventData.pointerDrag.GetComponent<RectTransform>().position = GetComponent<RectTransform>().position;
             eventData.pointerDrag.transform.parent = transform;
         }
-       
-       
     }
 
     private bool HasChild()
     {
-        if (transform.childCount > 0)
-        {
-            return true;
-        }
-        
-        return false;
+        return transform.childCount > 0;
     }
    
 }

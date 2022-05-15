@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
 
-public class CategorySlot : MonoBehaviour
+public class ResourceHolder : MonoBehaviour
 {
-    
+    public string id;
+
 }

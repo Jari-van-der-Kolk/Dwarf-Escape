@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Inventory;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class PickupItems : MonoBehaviour
         {
             hit.collider.GetComponent<IInteract>().Action();
         }
+        
     }
 
 

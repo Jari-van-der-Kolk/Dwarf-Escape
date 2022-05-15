@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d66852a649aeb4d88d7d9ade4a7113, type: 3}
   m_Name: Compact bone
   m_EditorClassIdentifier: 
-  id: 69
+  itemType: 0
+  id: Bones
   displayName: Compact bone
+  tier: 2
   icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   debugMode: 0
   prefab: {fileID: 0}

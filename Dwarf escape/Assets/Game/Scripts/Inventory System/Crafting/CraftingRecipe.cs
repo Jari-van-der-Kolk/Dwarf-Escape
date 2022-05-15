@@ -11,7 +11,7 @@ public class CraftingRecipe : MonoBehaviour
     public int maxTier;
     [SerializeField] private bool useTiers; // activate useTiers if you use the script for upgrading items
     public CraftingRecipeData[] craftingRecipeData;
-    [SerializeField] private UnityEvent action;
+    [SerializeField] private UnityEvent carftAction;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class CraftingRecipe : MonoBehaviour
         if (CheckAmount())
         {
             RemoveCraftingItems();
-            action?.Invoke();
+            carftAction?.Invoke();
         }
     }
 

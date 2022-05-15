@@ -11,7 +11,7 @@ namespace Inventory
         public static InventorySystem instance;
 
         private Dictionary<InventoryItemData, InventoryItem> _itemDictionary;
-        public List<InventoryItem> inventory { get; private set; }
+        private List<InventoryItem> inventory { get; set; }
 
         void Awake()
         {
@@ -49,14 +49,34 @@ namespace Inventory
             if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
                 value.AddToStack();
-                EquipmentSlotManager.updateValues?.Invoke(this, EventArgs.Empty);
+                
+                switch (referenceData.itemType)
+                {
+                    case ItemType.Equipment:
+                        EquipmentSlotManager.updateValues?.Invoke(this, EventArgs.Empty);
+                        break;
+                    case ItemType.Resource:
+                        ResourceManager.updateValues?.Invoke(this, EventArgs.Empty);
+                        break;
+                }
+               
             }
             else
             {
                 InventoryItem newItem = new InventoryItem(referenceData);
                 inventory.Add(newItem);
                 _itemDictionary.Add(referenceData, newItem);
-                EquipmentSlotManager.instance.Add(newItem);
+
+                switch (referenceData.itemType)
+                {
+                    case ItemType.Equipment:
+                        EquipmentSlotManager.instance.Add(newItem); 
+                        break;
+                    case ItemType.Resource:
+                        ResourceManager.instance.Add(newItem);
+                        break;
+                }
+              
             }
         }
 

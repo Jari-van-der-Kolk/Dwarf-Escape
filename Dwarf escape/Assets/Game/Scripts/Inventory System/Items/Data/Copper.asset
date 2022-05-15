@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d66852a649aeb4d88d7d9ade4a7113, type: 3}
   m_Name: Copper
   m_EditorClassIdentifier: 
-  id: 2
+  itemType: 0
+  id: Copper
   displayName: Copper
+  tier: 0
   icon: {fileID: 21300000, guid: f375a935d0c38f84d94844236012f26c, type: 3}
   debugMode: 0
   prefab: {fileID: 3401748924427365777, guid: 2d236c21913a3b84e9cde09e9d210951, type: 3}
