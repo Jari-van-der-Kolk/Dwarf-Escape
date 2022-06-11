@@ -14,11 +14,12 @@ public class ResourceManager : MonoBehaviour
 
    public static EventHandler updateValues;
 
+   [SerializeField] private GameObject SlotHolder;
    [SerializeField] private GameObject text;
 
    private void Awake()
    {
-      Init();
+      Init();                                   
    }
 
    public void Init()
@@ -47,21 +48,27 @@ public class ResourceManager : MonoBehaviour
          if (resourceHolders[i].id == referenceData.data.id)
          {
             hasFoundSlot = true;
-            //voeg hem toe aan de resourceHolder
-            
+           //voeg hem toe aan de resourceHolder
+
             CreateSlot(referenceData).transform.parent = resourceHolders[i].transform;
-            
-            
+            var sort = SortSlots(resourceHolders[i]);
+            for (int s = 0; s < sort.Length; s++)
+            {
+                resourceHolders[i].transform.GetChild(s).SetSiblingIndex(sort[s].transform.GetSiblingIndex());   
+            }
+            break;
          }
       }
 
       if (!hasFoundSlot)
       {
-         // maak een nieuwe equipmentHolder aan, en voeg de referenceData toe
-         
-         
-         CreateSlot(referenceData);
-      }      
+            // maak een nieuwe equipmentHolder aan, en voeg de referenceData toe
+            var slotHolder = CreateSlotHolder(referenceData);
+            resourceHolders.Add(slotHolder.GetComponent<ResourceHolder>());
+            CreateSlot(referenceData).transform.parent = slotHolder.transform;
+      }     
+      
+      
    }
 
    public Resource[] SortSlots(ResourceHolder resourceHolder)
@@ -70,7 +77,7 @@ public class ResourceManager : MonoBehaviour
       
       for (int i = 0; i < resourceHolder.transform.childCount; i++)
       {
-         resourceHolder.transform.GetChild(i).GetComponent<Resource>();
+            resources[i] = resourceHolder.transform.GetChild(i).GetComponent<Resource>();
       }
       
       Resource temp;
@@ -95,12 +102,19 @@ public class ResourceManager : MonoBehaviour
    {
       
    }
+
+    public GameObject CreateSlotHolder(InventoryItem referenceData)
+    {
+        var Holder = Instantiate(SlotHolder, transform);
+        Holder.GetComponent<ResourceHolder>().id = referenceData.data.id;
+        return Holder;
+    }
    
    public GameObject CreateSlot(InventoryItem referenceData)
    {
       var resource = new GameObject("ResourceSlot", typeof(Image), typeof(Resource));
       var text = Instantiate(this.text, resource.transform);
-      resource.GetComponent<Equipment>().Init(referenceData, text.GetComponent<TextMeshProUGUI>());
+      resource.GetComponent<Resource>().Init(referenceData, resource.GetComponent<Image>() , text.GetComponent<TextMeshProUGUI>());
 
       return resource;
    }
