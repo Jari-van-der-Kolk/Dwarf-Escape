@@ -9,7 +9,7 @@ public class PanelGroup : MonoBehaviour
 
     public int panelIndex;
 
-    private void Awake()
+    private void Start()
     {
         ShowCurrentPanel();
     }

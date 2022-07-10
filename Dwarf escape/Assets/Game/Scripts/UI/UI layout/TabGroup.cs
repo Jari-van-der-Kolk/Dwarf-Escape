@@ -23,13 +23,9 @@ public class TabGroup : MonoBehaviour
     {
         _defaultInputActions = new DefaultInputActions();
         _defaultInputActions.UI.Navigate.performed += NextTab;
-        StartActiveTab();
     }
-    
-    private void Start()
-    {
-        StartActiveTab();
-    }
+
+    // hier zou je in de problemen kunnen komen met het niet gebreuken van de StartActiveTab method
 
     private void OnEnable()
     {

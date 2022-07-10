@@ -31,6 +31,8 @@ namespace Inventory
 
             inventory = new List<InventoryItem>();
             _itemDictionary = new Dictionary<InventoryItemData, InventoryItem>();
+
+            DontDestroyOnLoad(gameObject);
         }
 
         public InventoryItem Get(InventoryItemData referenceData)
@@ -73,7 +75,7 @@ namespace Inventory
                         EquipmentSlotManager.instance.Add(newItem); 
                         break;
                     case ItemType.Resource:
-                        ResourceManager.instance.Add(newItem);
+                        ResourceManager.instance.Add(newItem);  
                         break;
                 }
               

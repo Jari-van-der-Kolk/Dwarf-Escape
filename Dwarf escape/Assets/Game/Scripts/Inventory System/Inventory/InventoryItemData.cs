@@ -17,7 +17,8 @@ namespace Inventory
         public ItemType itemType;
         public string id;
         public string displayName;
-        public int tier = 1;
+        public int valueTier = 1;
+        public int rarityTier = 1;
         public Sprite icon;
         public bool debugMode;
         public GameObject prefab;
