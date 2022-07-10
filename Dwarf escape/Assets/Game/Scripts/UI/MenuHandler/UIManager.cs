@@ -15,6 +15,7 @@ namespace JariUnityUISystem
         {
             AddLowestPriority();
             DeactivateAll();
+            DontDestroyOnLoad(this);
         }
 
         private void Update()
@@ -101,9 +102,9 @@ namespace JariUnityUISystem
             }
         }
 
-        public void ChangeTime(float timeSpeed)
+        public void ChangeTimeScale(float timeScaleSpeed)
         {
-            Time.timeScale = timeSpeed;
+            Time.timeScale = timeScaleSpeed;
         }
         
         private void AddLowestPriority()
