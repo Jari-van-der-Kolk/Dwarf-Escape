@@ -7,7 +7,7 @@ namespace JBehaviourTree
     {
         private int current;
 
-        public FallbackNode(List<Node> children)
+        public FallbackNode(List<Nodes> children)
         {
             this.children = children;
         }

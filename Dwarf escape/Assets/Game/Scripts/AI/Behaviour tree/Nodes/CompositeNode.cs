@@ -2,8 +2,8 @@
 
 namespace JBehaviourTree
 {
-    public abstract class CompositeNode : Node
+    public abstract class CompositeNode : Nodes
     {
-        protected List<Node> children = new List<Node>();
+        protected List<Nodes> children = new List<Nodes>();
     }
 }

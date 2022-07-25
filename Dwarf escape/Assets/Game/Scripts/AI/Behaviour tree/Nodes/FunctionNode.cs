@@ -4,7 +4,7 @@ namespace JBehaviourTree
 {
     public class FunctionNode : LeafNode
     {
-        public delegate Node.State ActionNodeDelegate();
+        public delegate Nodes.State ActionNodeDelegate();
         private ActionNodeDelegate m_action;
 
         public FunctionNode(ActionNodeDelegate action) {
@@ -20,17 +20,17 @@ namespace JBehaviourTree
         protected override State OnUpdate()
         {
             switch (m_action()) {
-                case Node.State.Success:
-                    state = Node.State.Success;
+                case Nodes.State.Success:
+                    state = Nodes.State.Success;
                     return state;
-                case Node.State.Failure:
-                    state = Node.State.Failure;
+                case Nodes.State.Failure:
+                    state = Nodes.State.Failure;
                     return state;
-                case Node.State.Running:
+                case Nodes.State.Running:
                     state = State.Running;
                     return state;
                 default:
-                    state = Node.State.Failure;
+                    state = Nodes.State.Failure;
                     return state;
             }
         } 

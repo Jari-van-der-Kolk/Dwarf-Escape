@@ -3,17 +3,17 @@ using JBehaviourTree;
 
     public class RootNode
     {
-        public Node rootNode;
-        public Node.State treeState = Node.State.Running;
+        public Nodes rootNode;
+        public Nodes.State treeState = Nodes.State.Running;
 
-        public RootNode(Node rootNode)
+        public RootNode(Nodes rootNode)
         {
             this.rootNode = rootNode;
         }
         
         public void Update()
         {
-            if(rootNode.state == Node.State.Running)
+            if(rootNode.state == Nodes.State.Running)
                 treeState = rootNode.Update();
         }
     }

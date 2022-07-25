@@ -6,7 +6,7 @@ using UnityEngine;
 public class TileNodeData : ScriptableObject
 {
     public Sprite defaultRockSprite;
-    public GameObject property;
+    public GameObject SpawnPrefab;
     public ParticleSystem particle;
     public int durability;
 

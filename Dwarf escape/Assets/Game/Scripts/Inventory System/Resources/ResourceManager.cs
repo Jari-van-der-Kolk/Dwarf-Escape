@@ -20,7 +20,6 @@ public class ResourceManager : MonoBehaviour, IManager
     private void Awake()
     {
         Init();
-        Debug.Log("hi");
     }
 
     public void Init()

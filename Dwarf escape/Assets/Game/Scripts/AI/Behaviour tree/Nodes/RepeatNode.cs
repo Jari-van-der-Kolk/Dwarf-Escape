@@ -2,7 +2,7 @@
 {
     public class RepeatNode : DecoratorNode
     {
-        public RepeatNode(Node child)
+        public RepeatNode(Nodes child)
         {
             this.child = child;
         }

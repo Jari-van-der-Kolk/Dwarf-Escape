@@ -1,7 +1,7 @@
 ﻿namespace JBehaviourTree
 {
-    public abstract class DecoratorNode : Node
+    public abstract class DecoratorNode : Nodes
     {
-        public Node child;
+        public Nodes child;
     }
 }

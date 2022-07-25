@@ -12,6 +12,11 @@ public class GameEvents : MonoBehaviour
         instance = this;
     }
 
+    public event Action onBlockDestroyed;
+    public void BlockDestroyed() 
+    {
+        onBlockDestroyed();
+    }
 
     
 }

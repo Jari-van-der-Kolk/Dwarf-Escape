@@ -2,7 +2,7 @@
 
 namespace JBehaviourTree
 {
-    public abstract class Node
+    public abstract class Nodes
     {
         public enum State
         {

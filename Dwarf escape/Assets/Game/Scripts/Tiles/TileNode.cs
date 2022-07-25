@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileNode : MonoBehaviour, IHitable
+public class TileNode : MonoBehaviour, IHitable, IUpdateASTARPathfinding
 {
     public TileNodeData tileNodeData;
 
@@ -21,12 +21,14 @@ public class TileNode : MonoBehaviour, IHitable
     private void Start() 
     {
         //_renderer.sprite = tileNodeData.defaultRockSprite;
-        if (tileNodeData.property == null)
+        if (tileNodeData.SpawnPrefab == null)
             hasItem = false;
         else
             hasItem = true;
 
         durability = tileNodeData.durability;
+
+        
     }
 
     public void Hit(int hitAmount)
@@ -40,11 +42,16 @@ public class TileNode : MonoBehaviour, IHitable
         if (durability <= 0)
         {
             gameObject.SetActive(false);
+            GameEvents.instance.BlockDestroyed();
         }
         if (hasItem)
         {
-            Instantiate(tileNodeData.property);
+            Instantiate(tileNodeData.SpawnPrefab);
         }
     }
-    
+
+    public void UpdateGrid()
+    {
+        
+    }
 }
