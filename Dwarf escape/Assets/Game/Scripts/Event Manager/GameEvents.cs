@@ -15,7 +15,10 @@ public class GameEvents : MonoBehaviour
     public event Action onBlockDestroyed;
     public void BlockDestroyed() 
     {
-        onBlockDestroyed();
+        if (onBlockDestroyed != null)
+        {
+            onBlockDestroyed();
+        }
     }
 
     

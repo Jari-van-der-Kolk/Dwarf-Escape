@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class BeginOrEndLocation
+public struct BeginOrEndLocation
 {
     public BeginOrEndLocation(GameObject beginPrefab, GameObject endPrefab, Vector2 location, Directions direction)
     {

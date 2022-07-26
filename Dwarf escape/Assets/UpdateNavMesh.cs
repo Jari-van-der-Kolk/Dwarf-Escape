@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class UpdateNavMesh : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private NavMeshSurface surface2d;
+
+    private void Awake()
     {
-        
+        surface2d = GetComponent<NavMeshSurface>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameEvents.instance.onBlockDestroyed += UpdateMesh;
     }
+
+    private void UpdateMesh()
+    {
+        surface2d.UpdateNavMesh(surface2d.navMeshData);
+    }
+
 }
