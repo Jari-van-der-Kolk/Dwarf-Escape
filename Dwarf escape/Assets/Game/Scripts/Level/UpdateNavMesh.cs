@@ -17,9 +17,7 @@ public class UpdateNavMesh : MonoBehaviour
         GameEvents.instance.onBlockDestroyed += UpdateMesh;
     }
 
-    private void UpdateMesh()
-    {
-        surface2d.UpdateNavMesh(surface2d.navMeshData);
-    }
+    private void UpdateMesh() =>  surface2d.UpdateNavMesh(surface2d.navMeshData);
+    
 
 }
