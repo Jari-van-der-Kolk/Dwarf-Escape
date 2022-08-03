@@ -1,4 +1,4 @@
 ﻿namespace JBehaviourTree
 {
-    public abstract class LeafNode : Nodes { }
+    public abstract class LeafNode : Node { }
 }

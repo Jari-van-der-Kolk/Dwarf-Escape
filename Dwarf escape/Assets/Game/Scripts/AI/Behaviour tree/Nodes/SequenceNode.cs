@@ -7,7 +7,7 @@ namespace JBehaviourTree
     {
         private int current;
 
-        public SequenceNode(List<Nodes> children)
+        public SequenceNode(List<Node> children)
         {
             this.children = children;
         }

@@ -47,7 +47,7 @@ using UnityEngine;
             hitGround = new GroundCheckNode(groundCheck, groundMask);
             wait = new WaitNode(.3f);
 
-            patrolling = new SequenceNode(new List<Nodes>
+            patrolling = new SequenceNode(new List<Node>
             {
                 partol,knockback, wait ,hitGround
             });
@@ -66,7 +66,8 @@ using UnityEngine;
             if (rb.velocity.x >= 0)
             {
                 isFlipped = false;
-            }else if (rb.velocity.x < 0)
+            }
+            else if (rb.velocity.x < 0)
             {
                 isFlipped = true;
             }
@@ -90,21 +91,21 @@ using UnityEngine;
             }
         }
 
-        private Nodes.State HitCheck()
+        private Node.State HitCheck()
         {
             if (isHit)
             {
                 rb.velocity = Vector2.zero;
-                return Nodes.State.Success;
+                return Node.State.Success;
             }
             Patrol();
-            return Nodes.State.Failure;
+            return Node.State.Failure;
         }
         
-        private Nodes.State Knockback()
+        private Node.State Knockback()
         {
             isHit = false;
-            return Nodes.State.Success;
+            return Node.State.Success;
         }
 
         private void Patrol()

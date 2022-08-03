@@ -5,9 +5,8 @@ namespace JBehaviourTree
 {
     public class FallbackNode : CompositeNode
     {
-        private int current;
 
-        public FallbackNode(List<Nodes> children)
+        public FallbackNode(List<Node> children)
         {
             this.children = children;
         }
