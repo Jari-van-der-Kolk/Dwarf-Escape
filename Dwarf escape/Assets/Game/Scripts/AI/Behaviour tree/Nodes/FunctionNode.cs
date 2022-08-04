@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace JBehaviourTree
 {
@@ -7,16 +8,14 @@ namespace JBehaviourTree
         public delegate Node.State ActionNodeDelegate();
         private ActionNodeDelegate m_action;
 
-        public FunctionNode(ActionNodeDelegate action) {
+
+        public FunctionNode(ActionNodeDelegate action)
+        {
             m_action = action;
         }
 
-        public FunctionNode(State state)
-        {
-            this.state = state;
-        }
 
-        protected override void OnStart(){ }
+        protected override void OnStart() { }
 
         protected override void OnStop() { }
 

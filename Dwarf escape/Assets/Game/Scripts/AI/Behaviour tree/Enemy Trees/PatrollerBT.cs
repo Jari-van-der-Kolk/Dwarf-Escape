@@ -30,6 +30,7 @@ using UnityEngine;
         private FunctionNode knockback;
         private WaitNode wait;
         private GroundCheckNode hitGround;
+        
         private FunctionNode partol;
         
 
@@ -49,7 +50,7 @@ using UnityEngine;
 
             patrolling = new SequenceNode(new List<Node>
             {
-                partol,knockback, wait ,hitGround
+                //partol,knockback, wait ,hitGround
             });
             
             

@@ -11,7 +11,10 @@ public class Actor : MonoBehaviour
     internal Rigidbody2D rb;
     internal NavMeshAgent agent;
     internal Transform playerLocation;
-    public float detectionDistance;
+    internal Vector2 target;
+    public float detectionDistance = 8.5f;
+    public float searchRandomLocationRadius = 5;
+    public float reachedDestination = 0.75f;
 
     private NavMeshPath navMeshPath;
 
@@ -24,9 +27,10 @@ public class Actor : MonoBehaviour
         navMeshPath = new NavMeshPath();
     }
 
-    public void GoToLocation(Vector3 location)
+    public Node.State GoToLocation()
     {
-        agent.SetDestination(location);
+        agent.SetDestination(target);
+        return Node.State.Success;
     }
 
     
@@ -46,41 +50,38 @@ public class Actor : MonoBehaviour
 
     
 
-    public Node.State HasReachedLocation(Vector2 target, float succesDistance)
+    public Node.State HasReachedLocation()
     {
-        if(Vector2.Distance(transform.position, target) < succesDistance)
+        if(Vector2.Distance(transform.position, target) < reachedDestination)
         {
             return Node.State.Success;
         }
 
-        return Node.State.Failure;
+        return Node.State.Running;
     }
 
-    public Node.State SearchForRandomLocation(float searchRadius, ref Vector2 randomPosition)
+    public Node.State SearchForRandomLocation()
     {
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * searchRadius;
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * searchRandomLocationRadius;
         randomDirection += transform.position;
         NavMeshHit hit;
-        Vector3 finalPosition = Vector3.zero;
-        if (NavMesh.SamplePosition(randomDirection, out hit, searchRadius, 1))
+        if (NavMesh.SamplePosition(randomDirection, out hit, searchRandomLocationRadius, 1))
         {
-            finalPosition = hit.position;
+            target = hit.position;
         }
 
-        if (!CheckPath(finalPosition))
+        if (!CheckPath())
         {
-            SearchForRandomLocation(searchRadius, ref randomPosition);
+            SearchForRandomLocation();
             return Node.State.Running;
         }
-
-        randomPosition = finalPosition;
 
         return Node.State.Success;
     }
 
-    private bool CheckPath(Vector3 targetPosition)
+    internal bool CheckPath()
     {
-        agent.CalculatePath(targetPosition, navMeshPath);
+        agent.CalculatePath(target, navMeshPath);
         if (navMeshPath.status != NavMeshPathStatus.PathComplete)
             return false;
         else

@@ -2,87 +2,102 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JBehaviourTree;
+using UnityEngine.AI;
+using Blackboard;
 
 
 public class Worm : Actor
 {
     [SerializeField] LayerMask mask;
     [SerializeField] private float radius;
-    Vector2 targetPosition;
 
     private RootNode tree;
     private FallbackNode root;
     private SequenceNode wander;
     private SequenceNode followPlayer;
-    private FunctionNode searchForLoction;
+    private FunctionNode searchForLocation;
     private FunctionNode goToLocation;
     private FunctionNode reachedLocation;
-    private RepeatNode foo;
+    private WaitNode wait;
 
+    BlackBoard blackboard;
 
+    bool beer = false;
 
     private void Start()
     {
+        blackboard = new BlackBoard();
+        
+
         CreateBT();
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
     }
-
     private void CreateBT()
     {
+        searchForLocation = new FunctionNode(SearchForRandomLocation);
+        goToLocation = new FunctionNode(GoToLocation);
+        reachedLocation = new FunctionNode(HasReachedLocation);
+        wait = new WaitNode(UnityEngine.Random.Range(.5f, 3f));
 
-        searchForLoction = new FunctionNode(SearchForRandomLocation(radius, ref targetPosition));
-        goToLocation = new FunctionNode(MoveToPosition(targetPosition));
-        reachedLocation = new FunctionNode(HasReachedLocation(targetPosition, .5f));
-
-        Debug.Log(goToLocation);
-
-        followPlayer = new SequenceNode(new List<Node>
-        {
-            
-        });
+        WaitNode delay = new WaitNode(10000f);
 
         wander = new SequenceNode(new List<Node>
         {
-           goToLocation 
+            searchForLocation, goToLocation, reachedLocation, wait
         });
 
+
+        CheckNode panda = new CheckNode(wander, ref beer);
+        DebugLogNode foo = new DebugLogNode(beer.ToString());
+        
         root = new FallbackNode(new List<Node>
         {
-            goToLocation
+            panda, delay       
         });
 
-        
+        RepeatNode repeat = new RepeatNode(root);
 
-        tree = new RootNode(wander);
+
+        tree = new RootNode(repeat);
     }
 
     void Update()
     {
-        tree.Update();
-       /* if (Input.GetKeyUp(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            SearchForRandomLocation(radius, ref targetPosition);
-            GoToLocation(targetPosition);
+            beer = !beer;
         }
-
-        if (!HasObjectInSight(playerLocation))
-            return;
-            
-        GoToLocation(playerLocation.position);*/
+        tree.Update();
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(targetPosition, .75f);
+        Gizmos.DrawSphere(target, .75f);
     }
 
-    public Node.State MoveToPosition(Vector2 position)
+    private bool ChangeTest()
     {
-        GoToLocation(position);
-        return Node.State.Success;
+        beer = !beer;
+        Debug.Log(beer);
+        return beer;
     }
+
+    
 
 }
+
+
+
+/* if (Input.GetKeyUp(KeyCode.T))
+{
+SearchForRandomLocation(radius, ref targetPosition);
+GoToLocation(targetPosition);
+}
+
+if (!HasObjectInSight(playerLocation))
+return;
+
+GoToLocation(playerLocation.position);*/

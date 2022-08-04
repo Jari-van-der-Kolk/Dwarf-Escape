@@ -14,7 +14,6 @@ namespace JBehaviourTree
         
         protected override void OnStart()
         {
-            Debug.Log("Wait for " + duraction);
             startTime = Time.time;
         }
 
