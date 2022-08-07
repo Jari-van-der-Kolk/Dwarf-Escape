@@ -13,22 +13,18 @@ public class Worm : Actor
 
     private RootNode tree;
     private FallbackNode root;
+    private ReactiveSequenceNode followPlayer;
     private SequenceNode wander;
-    private SequenceNode followPlayer;
+    private ReactiveSequenceNode roam;
+    private FunctionNode goToPlayer;
     private FunctionNode searchForLocation;
     private FunctionNode goToLocation;
-    private FunctionNode reachedLocation;
-    private WaitNode wait;
-
-    BlackBoard blackboard;
-
-    bool beer = false;
+    private FunctionNode inSight;
+    private RandomWaitNode wait;
+    private InverterNode inverter;
 
     private void Start()
     {
-        blackboard = new BlackBoard();
-        
-
         CreateBT();
 
         agent.updateRotation = false;
@@ -39,37 +35,41 @@ public class Worm : Actor
     {
         searchForLocation = new FunctionNode(SearchForRandomLocation);
         goToLocation = new FunctionNode(GoToLocation);
-        reachedLocation = new FunctionNode(HasReachedLocation);
-        wait = new WaitNode(UnityEngine.Random.Range(.5f, 3f));
+        wait = new RandomWaitNode(.5f, 4f);
+        goToPlayer = new FunctionNode(GoToPlayer);
+        inSight = new FunctionNode(HasPlayerInSight);
+        inverter = new InverterNode(inSight);
 
-        WaitNode delay = new WaitNode(10000f);
+        DebugLogNode foo = new DebugLogNode("1");
+        DebugLogNode panda = new DebugLogNode("2");
+        DebugLogNode poo = new DebugLogNode("3");
 
         wander = new SequenceNode(new List<Node>
         {
-            searchForLocation, goToLocation, reachedLocation, wait
+            searchForLocation, goToLocation, wait
         });
 
+        roam = new ReactiveSequenceNode(new List<Node>
+        {
+            foo, inSight, wander
+        });
 
-        CheckNode panda = new CheckNode(wander, ref beer);
-        DebugLogNode foo = new DebugLogNode(beer.ToString());
-        
+        followPlayer = new ReactiveSequenceNode(new List<Node>
+        {
+            panda, inverter, goToPlayer  
+        });
+
         root = new FallbackNode(new List<Node>
         {
-            panda, delay       
+           roam, followPlayer
         });
 
-        RepeatNode repeat = new RepeatNode(root);
-
-
-        tree = new RootNode(repeat);
+        tree = new RootNode(root);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            beer = !beer;
-        }
+        //Debug.Log(HasPlayerInSight() + " " + inverter.Update());
         tree.Update();
     }
 
@@ -77,15 +77,6 @@ public class Worm : Actor
     {
         Gizmos.DrawSphere(target, .75f);
     }
-
-    private bool ChangeTest()
-    {
-        beer = !beer;
-        Debug.Log(beer);
-        return beer;
-    }
-
-    
 
 }
 

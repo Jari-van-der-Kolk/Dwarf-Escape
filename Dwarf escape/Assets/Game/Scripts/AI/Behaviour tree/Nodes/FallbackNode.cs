@@ -17,9 +17,10 @@ namespace JBehaviourTree
 
         protected override State OnUpdate()
         {
-            foreach (var child in children)
+            foreach (Node node in children)
             {
-                switch (child.Update())
+
+                switch (node.Update())
                 {
                     case State.Failure:
                         continue;

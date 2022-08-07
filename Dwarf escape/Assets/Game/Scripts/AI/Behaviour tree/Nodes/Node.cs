@@ -37,9 +37,5 @@ namespace JBehaviourTree
         protected abstract void OnStop();
         protected abstract State OnUpdate();
 
-        protected struct Blackboard { };
-
-
-
     }
 }

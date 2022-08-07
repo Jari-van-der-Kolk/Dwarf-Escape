@@ -59,7 +59,7 @@ using UnityEngine;
         }
         private void Update()
         {
-            tree.Update();
+            //tree.Update();
 
             touchingGround = groundCheck.IsTouchingLayers(groundMask);
             

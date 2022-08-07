@@ -14,7 +14,6 @@ namespace JBehaviourTree
             m_action = action;
         }
 
-
         protected override void OnStart() { }
 
         protected override void OnStop() { }
@@ -23,17 +22,17 @@ namespace JBehaviourTree
         {
             switch (m_action()) 
             {
-                case Node.State.Success:
-                    state = Node.State.Success;
+                case State.Success:
+                    state = State.Success;
                     return state;
-                case Node.State.Failure:
-                    state = Node.State.Failure;
+                case State.Failure:
+                    state = State.Failure;
                     return state;
-                case Node.State.Running:
+                case State.Running:
                     state = State.Running;
                     return state;
                 default:
-                    state = Node.State.Failure;
+                    state = State.Failure;
                     return state;
             }
         } 

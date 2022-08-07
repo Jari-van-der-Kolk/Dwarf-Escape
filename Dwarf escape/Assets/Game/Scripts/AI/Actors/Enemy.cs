@@ -29,10 +29,20 @@ public class Actor : MonoBehaviour
 
     public Node.State GoToLocation()
     {
-        agent.SetDestination(target);
-        return Node.State.Success;
+        agent.destination = target;
+        if (Vector2.Distance(transform.position, target) < reachedDestination)
+        {
+            return Node.State.Success;
+        }
+        return Node.State.Running;
     }
 
+    public Node.State GoToPlayer()
+    {
+        Debug.Log("Following player");
+        agent.SetDestination(playerLocation.position);
+        return Node.State.Success;
+    }
     
     public bool HasObjectInSight(Transform location)
     {
@@ -48,7 +58,13 @@ public class Actor : MonoBehaviour
         return false;
     }
 
-    
+    public Node.State HasPlayerInSight()
+    {
+        if (!HasObjectInSight(playerLocation))
+            return Node.State.Success;
+
+        return Node.State.Failure;
+    }
 
     public Node.State HasReachedLocation()
     {

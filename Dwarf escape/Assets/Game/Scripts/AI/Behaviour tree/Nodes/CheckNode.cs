@@ -8,7 +8,7 @@ namespace JBehaviourTree
 
     public class CheckNode : DecoratorNode
     {
-        bool check;
+        public bool check;
         
         public CheckNode(Node child, bool check)
         {
@@ -16,22 +16,25 @@ namespace JBehaviourTree
             this.check = check;
         }
 
-        protected override void OnStart() 
-        {
-            
-        }
+        protected override void OnStart() { }
 
         protected override void OnStop() { }
 
         protected override State OnUpdate()
         {
-            child.Update();
 
+            if (child.Update() == State.Failure)
+                return State.Failure;
 
-            if (check == true) 
-                return State.Success;
+            if (check == true)
+            {
+                child.Update();
+                return State.Running;
+            } 
             else
                 return State.Failure;
+            
+            
         }
     }
 

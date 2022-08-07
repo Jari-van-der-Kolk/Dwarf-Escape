@@ -1,5 +1,10 @@
 ﻿using System.Net.Mail;
-using JBehaviourTree;
+using System.Collections;
+using UnityEngine;
+
+
+namespace JBehaviourTree
+{
 
     public class RootNode
     {
@@ -13,7 +18,9 @@ using JBehaviourTree;
         
         public void Update()
         {
-            if(rootNode.state == Node.State.Running)
+            //if(treeState == Node.State.Running)
                 treeState = rootNode.Update();
         }
     }
+
+}

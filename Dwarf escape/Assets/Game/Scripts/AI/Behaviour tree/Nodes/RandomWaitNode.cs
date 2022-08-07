@@ -1,20 +1,26 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace JBehaviourTree
 {
-    public class WaitNode : LeafNode
-    {
-        public float duraction = 1;
-        private float startTime;
 
-        public WaitNode(float duraction)
+    public class RandomWaitNode : LeafNode
+    {
+        private float min;
+        private float max;
+        private float startTime;
+        private float duraction;
+
+        public RandomWaitNode(float min, float max)
         {
-            this.duraction = duraction;
+            this.min = min;
+            this.max = max;
         }
 
         protected override void OnStart()
         {
-
+            duraction = Random.Range(min, max);
             startTime = Time.time;
         }
 
@@ -30,4 +36,5 @@ namespace JBehaviourTree
             return State.Running;
         }
     }
+
 }
