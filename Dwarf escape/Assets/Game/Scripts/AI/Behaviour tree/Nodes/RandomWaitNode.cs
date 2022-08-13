@@ -24,7 +24,7 @@ namespace JBehaviourTree
             startTime = Time.time;
         }
 
-        protected override void OnStop() { }
+        internal override void OnStop() { }
 
         protected override State OnUpdate()
         {

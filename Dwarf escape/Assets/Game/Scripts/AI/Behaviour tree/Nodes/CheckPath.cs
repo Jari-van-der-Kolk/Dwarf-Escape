@@ -11,7 +11,7 @@ namespace JBehaviourTree
             throw new System.NotImplementedException();
         }
 
-        protected override void OnStop()
+        internal override void OnStop()
         {
             throw new System.NotImplementedException();
         }

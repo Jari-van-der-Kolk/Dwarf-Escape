@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace JBehaviourTree
 {
-    public class WaitNode : LeafNode
+
+    public class RepeatOverTimeNode : DecoratorNode
     {
         public float duraction = 1;
         private float startTime;
 
-        public WaitNode(float duraction)
+        public RepeatOverTimeNode(Node child, float duraction)
         {
+            this.child = child;
             this.duraction = duraction;
         }
 
@@ -17,7 +21,10 @@ namespace JBehaviourTree
             startTime = Time.time;
         }
 
-        internal override void OnStop() { }
+        internal override void OnStop() 
+        {
+            
+        }
 
         protected override State OnUpdate()
         {
@@ -26,7 +33,11 @@ namespace JBehaviourTree
                 return State.Success;
             }
 
+            child.Update();
             return State.Running;
         }
+
+
     }
+
 }

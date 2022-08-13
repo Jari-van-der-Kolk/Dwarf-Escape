@@ -39,7 +39,6 @@ public class Actor : MonoBehaviour
 
     public Node.State GoToPlayer()
     {
-        Debug.Log("Following player");
         agent.SetDestination(playerLocation.position);
         return Node.State.Success;
     }
@@ -64,6 +63,13 @@ public class Actor : MonoBehaviour
             return Node.State.Success;
 
         return Node.State.Failure;
+    }
+
+    public Node.State TargetPlayer()
+    {
+        target = playerLocation.position;
+        agent.destination = target;
+        return Node.State.Success;
     }
 
     public Node.State HasReachedLocation()

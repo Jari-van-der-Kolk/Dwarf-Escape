@@ -17,7 +17,7 @@ namespace JBehaviourTree
             Debug.Log($"OnStart {message}");
         }
 
-        protected override void OnStop()
+        internal override void OnStop()
         {
             Debug.Log($"OnStop {message}");
         }

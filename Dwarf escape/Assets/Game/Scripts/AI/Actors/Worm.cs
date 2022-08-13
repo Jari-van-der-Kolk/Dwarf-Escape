@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using JBehaviourTree;
-using UnityEngine.AI;
 using Blackboard;
-
 
 public class Worm : Actor
 {
@@ -12,16 +10,28 @@ public class Worm : Actor
     [SerializeField] private float radius;
 
     private RootNode tree;
-    private FallbackNode root;
+    private SequenceNode lostPlayer;
+    private FallbackStarNode root;
     private ReactiveSequenceNode followPlayer;
     private SequenceNode wander;
+    private ReactiveSequenceNode trackPlayer;
     private ReactiveSequenceNode roam;
     private FunctionNode goToPlayer;
+    private FunctionNode targetPlayer;
     private FunctionNode searchForLocation;
     private FunctionNode goToLocation;
     private FunctionNode inSight;
-    private RandomWaitNode wait;
-    private InverterNode inverter;
+    private RandomWaitNode waitOnPosition;
+    private InverterNode invertInSight;
+    private InverterNode invertFollowPlayerTime;
+
+    private RepeatOverTimeNode followPlayerTime;
+
+    private InverterNode reachedLocation;
+
+    DebugLogNode panda;
+
+    bool foo = false;
 
     private void Start()
     {
@@ -35,33 +45,45 @@ public class Worm : Actor
     {
         searchForLocation = new FunctionNode(SearchForRandomLocation);
         goToLocation = new FunctionNode(GoToLocation);
-        wait = new RandomWaitNode(.5f, 4f);
+        waitOnPosition = new RandomWaitNode(.5f, 4f);
         goToPlayer = new FunctionNode(GoToPlayer);
+        targetPlayer = new FunctionNode(TargetPlayer);
         inSight = new FunctionNode(HasPlayerInSight);
-        inverter = new InverterNode(inSight);
+        invertInSight = new InverterNode(inSight);
 
-        DebugLogNode foo = new DebugLogNode("1");
-        DebugLogNode panda = new DebugLogNode("2");
-        DebugLogNode poo = new DebugLogNode("3");
 
         wander = new SequenceNode(new List<Node>
         {
-            searchForLocation, goToLocation, wait
+            searchForLocation, goToLocation, waitOnPosition
         });
 
         roam = new ReactiveSequenceNode(new List<Node>
         {
-            foo, inSight, wander
+            inSight, wander
         });
 
         followPlayer = new ReactiveSequenceNode(new List<Node>
         {
-            panda, inverter, goToPlayer  
+            invertInSight, goToPlayer  
         });
 
-        root = new FallbackNode(new List<Node>
+        reachedLocation = new InverterNode(goToLocation);
+        followPlayerTime = new RepeatOverTimeNode(targetPlayer, 4f);
+        invertFollowPlayerTime = new InverterNode(followPlayerTime);
+
+        lostPlayer = new SequenceNode(new List<Node>
         {
-           roam, followPlayer
+            followPlayerTime, goToLocation   
+        }, true);
+
+        trackPlayer = new ReactiveSequenceNode(new List<Node>
+        {
+            inSight, reachedLocation, lostPlayer 
+        });
+
+        root = new FallbackStarNode(new List<Node>   
+        {
+            roam, followPlayer, trackPlayer 
         });
 
         tree = new RootNode(root);
@@ -69,8 +91,8 @@ public class Worm : Actor
 
     void Update()
     {
-        //Debug.Log(HasPlayerInSight() + " " + inverter.Update());
         tree.Update();
+        //Debug.Log(inSight.state);
     }
 
     private void OnDrawGizmos()
@@ -78,17 +100,15 @@ public class Worm : Actor
         Gizmos.DrawSphere(target, .75f);
     }
 
+    private Node.State ReturnFailure()
+    {
+        Debug.Log("failure node running" + " " + foo);
+        if (foo)
+        {
+            return Node.State.Success;
+        }
+        return Node.State.Failure;
+    }
 }
 
 
-
-/* if (Input.GetKeyUp(KeyCode.T))
-{
-SearchForRandomLocation(radius, ref targetPosition);
-GoToLocation(targetPosition);
-}
-
-if (!HasObjectInSight(playerLocation))
-return;
-
-GoToLocation(playerLocation.position);*/

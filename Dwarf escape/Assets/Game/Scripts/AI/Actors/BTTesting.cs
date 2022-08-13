@@ -6,7 +6,7 @@ using JBehaviourTree;
 public class BTTesting : Actor
 {
     private RootNode root;
-    private FallbackNode fallbackNode;
+    private FallbackStarNode fallbackNode;
     private DebugLogNode debugLogNode1;
     private DebugLogNode debugLogNode2;
     private DebugLogNode debugLogNode3;
@@ -18,12 +18,16 @@ public class BTTesting : Actor
     {
         debugLogNode1 = new DebugLogNode(" 1"); 
         debugLogNode2 = new DebugLogNode(" 2");
-        debugLogNode3 = new DebugLogNode(" 3");
+        debugLogNode3 = new DebugLogNode(" ffffffffffff");
         functionNode = new FunctionNode(ReturnFailure);
+        WaitNode panda = new WaitNode(.5f);
+        RepeatOverTimeNode repeatNode = new RepeatOverTimeNode(debugLogNode1, 5f);
+        InverterNode inverterNode = new InverterNode(repeatNode);
 
-        fallbackNode = new FallbackNode(new List<Node>
+
+        fallbackNode = new FallbackStarNode (new List<Node>
         {
-             debugLogNode2, functionNode, debugLogNode3
+             inverterNode, debugLogNode2, debugLogNode3
         });
 
         root = new RootNode(fallbackNode);
@@ -42,6 +46,7 @@ public class BTTesting : Actor
 
     private Node.State ReturnFailure()
     {
+        Debug.Log("f");
         if(foo)
         {
             return Node.State.Success;

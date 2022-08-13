@@ -34,7 +34,7 @@ namespace JBehaviourTree
         }
 
         protected abstract void OnStart();
-        protected abstract void OnStop();
+        internal abstract void OnStop();
         protected abstract State OnUpdate();
 
     }

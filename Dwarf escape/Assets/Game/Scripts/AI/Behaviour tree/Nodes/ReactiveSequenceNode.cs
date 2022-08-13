@@ -5,8 +5,6 @@ namespace JBehaviourTree
 {
     public class ReactiveSequenceNode : CompositeNode
     {
-        private int index;
-
         public ReactiveSequenceNode(List<Node> children)
         {
             this.children = children;
@@ -17,7 +15,7 @@ namespace JBehaviourTree
 
         }
 
-        protected override void OnStop() { }
+        internal override void OnStop() { }
 
         protected override State OnUpdate()
         {
@@ -31,6 +29,7 @@ namespace JBehaviourTree
                         anyChildRunning = true;
                         continue;
                     case State.Failure:
+                        HaltChildren();
                         return State.Failure;
                     case State.Success:
                         continue;

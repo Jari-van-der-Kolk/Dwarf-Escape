@@ -5,10 +5,16 @@ namespace JBehaviourTree
 {
     public class SequenceNode : CompositeNode
     {
+        bool debug;
 
         public SequenceNode(List<Node> children)
         {
             this.children = children;
+        }  
+        public SequenceNode(List<Node> children, bool debug)
+        {
+            this.children = children;
+            this.debug = debug;
         }
         
         protected override void OnStart()
@@ -16,13 +22,18 @@ namespace JBehaviourTree
             index = 0;
         }
 
-        protected override void OnStop()
+        internal override void OnStop()
         {
             index = 0;
         }
 
         protected override State OnUpdate()
         {
+
+            if (debug)
+            {
+                Debug.Log(index);
+            }
 
             while (index < children.Count)
             {

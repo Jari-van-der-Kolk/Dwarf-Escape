@@ -11,15 +11,40 @@ namespace JBehaviourTree
             this.children = children;
         }
 
-        protected override void OnStart() { }
+        protected override void OnStart() 
+        {
+            index = 0;
+        }
 
-        protected override void OnStop() { }
+        internal override void OnStop() { }
 
         protected override State OnUpdate()
         {
-            foreach (Node node in children)
+            while (index < children.Count)
             {
+                var child = children[index];
 
+                if (child.Update() == State.Running)
+                {
+                    return State.Running;
+                }
+                else if (child.Update() == State.Failure)
+                {
+                    index++;
+                }
+                else if (child.Update() == State.Success)
+                {
+                    index = 0;
+                    return State.Running;
+                }
+
+            }
+
+            index = 0;
+            return State.Failure;
+
+            /*foreach (Node node in children)
+            {
                 switch (node.Update())
                 {
                     case State.Failure:
@@ -32,7 +57,7 @@ namespace JBehaviourTree
                         continue;
                 }
             }
-            return State.Failure;
+            return State.Failure;*/
         }
     }
 }
