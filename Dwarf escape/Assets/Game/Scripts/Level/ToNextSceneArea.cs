@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToNextSceneOnTriggerCollision : MonoBehaviour
+public class ToNextSceneArea : MonoBehaviour
 {
     [SerializeField] private string sceneName;
 

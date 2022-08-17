@@ -29,7 +29,16 @@ namespace Player
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, mineDistance, mask);
             if (hit.collider != null)
-                hit.collider.GetComponent<IHitable>().Hit(hitAmount);
+            {
+                var foo = hit.collider.GetComponents<IHitable>();
+
+                for (int i = 0; i < foo.Length; i++)
+                {
+                    foo[i].Hit(hitAmount);
+                }
+
+            }
+                //hit.collider.GetComponent<IHitable>().Hit(hitAmount);
         }
         
         

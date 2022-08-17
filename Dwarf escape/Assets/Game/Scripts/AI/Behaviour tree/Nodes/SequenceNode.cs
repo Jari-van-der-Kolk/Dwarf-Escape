@@ -52,19 +52,24 @@ namespace JBehaviourTree
             index = 0;
             return State.Success;
 
-            /*var child = children[index];
-
-            switch (child.Update())
-            {
-                case State.Running:
-                    return State.Running;
-                case State.Failure:
-                    return State.Failure;
-                case State.Success:
-                    index++;
-                    break;
-            }
-            return index >= children.Count ? State.Success : State.Running;*/
         }
     }
 }
+         
+
+
+
+/*var child = children[index];
+
+
+switch (child.Update())
+{
+    case State.Running:
+        return State.Running;
+    case State.Failure:
+        return State.Failure;
+    case State.Success:
+        index++;
+        break;
+}
+return index >= children.Count ? State.Success : State.Running;*/

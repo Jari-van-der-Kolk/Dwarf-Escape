@@ -6,8 +6,9 @@ using UnityEngine;
 public class TileNodeData : ScriptableObject
 {
     public Sprite defaultRockSprite;
-    public GameObject SpawnPrefab;
     public ParticleSystem particle;
     public int durability;
+    public float spawnPrefabDelay = 0.3f;
+    public GameObject SpawnPrefab;
 
 }

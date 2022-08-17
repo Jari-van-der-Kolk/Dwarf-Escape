@@ -13,6 +13,8 @@ public class BeginAndEndGenerator : MonoBehaviour
     [SerializeField] private GameObject beginPrefab;
     [SerializeField] private GameObject endPrefab;
 
+    public List<BeginOrEndLocation> beginOrEndLocations;
+
 
     private void Awake()
     {
@@ -51,6 +53,7 @@ public class BeginAndEndGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, positions.Count);
         BeginOrEndLocation position = positions[randomIndex];
         CreateStartOrEndPosition(position.location, position.beginPrefab, position.direction);
+        beginOrEndLocations.Add(position);
         positions.Remove(position);
     }
 
@@ -59,6 +62,7 @@ public class BeginAndEndGenerator : MonoBehaviour
         int randomIndex = Random.Range(0, positions.Count);
         BeginOrEndLocation position = positions[randomIndex];
         CreateStartOrEndPosition(position.location, position.endPrefab, position.direction);
+        beginOrEndLocations.Add(position);
     }
 
     private void CreateStartOrEndPosition(Vector3 spawnPosition, GameObject beginOrEndPrefab, Directions direction)

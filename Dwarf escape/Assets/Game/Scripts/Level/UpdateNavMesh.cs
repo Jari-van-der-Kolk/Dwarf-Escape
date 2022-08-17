@@ -14,6 +14,7 @@ public class UpdateNavMesh : MonoBehaviour
 
     private void Start()
     {
+        UpdateMesh();
         GameEvents.instance.onBlockDestroyed += UpdateMesh;
     }
 

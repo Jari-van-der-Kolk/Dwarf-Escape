@@ -8,6 +8,7 @@ public class Worm : Actor
 {
     [SerializeField] LayerMask mask;
     [SerializeField] private float radius;
+    [SerializeField] private float losePlayerTime = 4f;
 
     private RootNode tree;
     private SequenceNode lostPlayer;
@@ -23,24 +24,20 @@ public class Worm : Actor
     private FunctionNode inSight;
     private RandomWaitNode waitOnPosition;
     private InverterNode invertInSight;
-    private InverterNode invertFollowPlayerTime;
-
+    private InverterNode reachedLocation;
     private RepeatOverTimeNode followPlayerTime;
 
-    private InverterNode reachedLocation;
-
-    DebugLogNode panda;
-
-    bool foo = false;
 
     private void Start()
     {
         CreateBT();
 
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-
     }
+
     private void CreateBT()
     {
         searchForLocation = new FunctionNode(SearchForRandomLocation);
@@ -68,13 +65,12 @@ public class Worm : Actor
         });
 
         reachedLocation = new InverterNode(goToLocation);
-        followPlayerTime = new RepeatOverTimeNode(targetPlayer, 4f);
-        invertFollowPlayerTime = new InverterNode(followPlayerTime);
+        followPlayerTime = new RepeatOverTimeNode(targetPlayer, losePlayerTime);
 
         lostPlayer = new SequenceNode(new List<Node>
         {
             followPlayerTime, goToLocation   
-        }, true);
+        });
 
         trackPlayer = new ReactiveSequenceNode(new List<Node>
         {
@@ -92,7 +88,6 @@ public class Worm : Actor
     void Update()
     {
         tree.Update();
-        //Debug.Log(inSight.state);
     }
 
     private void OnDrawGizmos()
@@ -100,15 +95,6 @@ public class Worm : Actor
         Gizmos.DrawSphere(target, .75f);
     }
 
-    private Node.State ReturnFailure()
-    {
-        Debug.Log("failure node running" + " " + foo);
-        if (foo)
-        {
-            return Node.State.Success;
-        }
-        return Node.State.Failure;
-    }
 }
 
 

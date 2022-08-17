@@ -16,8 +16,8 @@ public class PerlinMapGenerator : MonoBehaviour
 	// recommend 4 to 20
 	[SerializeField]float magnification = 7.0f;
 
-	int x_offset = 0; // <- +>
-	int y_offset = 0; // v- +^
+	public int x_offset = 0; // <- +>
+    public int y_offset = 0; // v- +^
 
     void Awake()
     {
