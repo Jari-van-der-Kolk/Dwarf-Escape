@@ -35,8 +35,8 @@ namespace JBehaviourTree
             {
                 Debug.Log(index);
             }
-            var child = children[index];
-            switch (child.Update())
+            var child = children[index].Update();
+            switch (child)
             {
                 case State.Running:
                     return State.Running;

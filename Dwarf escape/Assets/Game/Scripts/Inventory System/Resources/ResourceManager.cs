@@ -12,7 +12,6 @@ public class ResourceManager : MonoBehaviour, IManager
    
    public List<ResourceHolder> resourceHolders = new List<ResourceHolder>();
 
-   public static EventHandler updateValues;
 
    [SerializeField] private GameObject SlotHolder;
    [SerializeField] private GameObject text;
@@ -20,6 +19,11 @@ public class ResourceManager : MonoBehaviour, IManager
     private void Awake()
     {
         Init();
+    }
+
+    private void Start()
+    {
+        //GameEvents.instance.updateResourceValues += UpdateValues;
     }
 
     public void Init()
@@ -149,8 +153,17 @@ public class ResourceManager : MonoBehaviour, IManager
 
       return resource;
    }
+
+    /*private void UpdateValues()
+    {
+        foreach (ResourceHolder resource in resourceHolders)
+        {
+
+        }
+        
+    }
    
-   
+   */
    
    
 }

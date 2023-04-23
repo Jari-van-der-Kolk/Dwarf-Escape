@@ -21,5 +21,14 @@ public class GameEvents : MonoBehaviour
         }
     }
 
+    public event Action updateResourceValues;
+    public void UpdateValues()
+    {
+        if (updateResourceValues != null)
+        {
+            updateResourceValues();
+        }
+    }
+
     
 }

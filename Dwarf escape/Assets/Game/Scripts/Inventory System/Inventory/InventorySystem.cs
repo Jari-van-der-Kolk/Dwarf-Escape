@@ -51,17 +51,7 @@ namespace Inventory
             if (_itemDictionary.TryGetValue(referenceData, out InventoryItem value))
             {
                 value.AddToStack();
-                
-                switch (referenceData.itemType)
-                {
-                    case ItemType.Equipment:
-                        EquipmentSlotManager.updateValues?.Invoke(this, EventArgs.Empty);
-                        break;
-                    case ItemType.Resource:
-                        ResourceManager.updateValues?.Invoke(this, EventArgs.Empty);
-                        break;
-                }
-               
+                GameEvents.instance.UpdateValues();
             }
             else
             {
@@ -98,3 +88,16 @@ namespace Inventory
 
     }
 }
+
+
+
+/*switch (referenceData.itemType)
+{
+    case ItemType.Equipment:
+        //EquipmentSlotManager.updateValues?.Invoke(this, EventArgs.Empty);
+        break;
+    case ItemType.Resource:
+        *//*ResourceManager.updateValues?.Invoke(this, EventArgs.Empty);*//*
+        GameEvents.instance.UpdateValues();
+        break;
+}*/

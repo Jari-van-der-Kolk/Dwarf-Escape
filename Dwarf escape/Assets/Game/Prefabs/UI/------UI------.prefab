@@ -574,7 +574,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5997585290645793563}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.64118737
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -591,6 +591,7 @@ GameObject:
   - component: {fileID: 5997585290398047373}
   - component: {fileID: 5997585290398047362}
   - component: {fileID: 5997585290398047372}
+  - component: {fileID: 6421456103815846141}
   m_Layer: 5
   m_Name: Equipment Slot (4)
   m_TagString: Untagged
@@ -666,6 +667,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee59a690a5206944a1753a4741e062e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6421456103815846141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585290398047360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de05a56e631114cb1be6ab664ba757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5997585290414458576
@@ -1380,6 +1393,7 @@ GameObject:
   - component: {fileID: 5997585290550507688}
   - component: {fileID: 5997585290550507689}
   - component: {fileID: 5997585290550507691}
+  - component: {fileID: 8564969059498213101}
   m_Layer: 5
   m_Name: Equipment Slot
   m_TagString: Untagged
@@ -1455,6 +1469,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee59a690a5206944a1753a4741e062e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8564969059498213101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585290550507695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de05a56e631114cb1be6ab664ba757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5997585290631133404
@@ -3039,7 +3065,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5997585291129409557}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.4989806
+  m_Size: 0.31994006
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3641,6 +3667,7 @@ GameObject:
   - component: {fileID: 5997585290912300716}
   - component: {fileID: 5997585290912300717}
   - component: {fileID: 5997585290912300719}
+  - component: {fileID: 7942973485917678129}
   m_Layer: 5
   m_Name: Equipment Slot (2)
   m_TagString: Untagged
@@ -3716,6 +3743,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee59a690a5206944a1753a4741e062e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7942973485917678129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585290912300707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de05a56e631114cb1be6ab664ba757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5997585290931660545
@@ -6086,6 +6125,7 @@ GameObject:
   - component: {fileID: 5997585291640623461}
   - component: {fileID: 5997585291640623386}
   - component: {fileID: 5997585291640623460}
+  - component: {fileID: 4682588642071933305}
   m_Layer: 5
   m_Name: Equipment Slot (1)
   m_TagString: Untagged
@@ -6161,6 +6201,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee59a690a5206944a1753a4741e062e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4682588642071933305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585291640623384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de05a56e631114cb1be6ab664ba757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5997585291643550997
@@ -7275,6 +7327,7 @@ GameObject:
   - component: {fileID: 5997585291880585818}
   - component: {fileID: 5997585291880585819}
   - component: {fileID: 5997585291880585816}
+  - component: {fileID: 4176137224794516914}
   m_Layer: 5
   m_Name: Equipment View
   m_TagString: Untagged
@@ -7371,6 +7424,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4176137224794516914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585291880585822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286488522a954304499651566dbe605e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5997585291905612209
 GameObject:
   m_ObjectHideFlags: 0
@@ -9093,6 +9158,7 @@ GameObject:
   - component: {fileID: 5997585292197862617}
   - component: {fileID: 5997585292197862622}
   - component: {fileID: 5997585292197862616}
+  - component: {fileID: 6895125571709315226}
   m_Layer: 5
   m_Name: Equipment Slot (3)
   m_TagString: Untagged
@@ -9170,6 +9236,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee59a690a5206944a1753a4741e062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6895125571709315226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997585292197862620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25de05a56e631114cb1be6ab664ba757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5997585292206787251
 GameObject:
   m_ObjectHideFlags: 0
@@ -9181,7 +9259,6 @@ GameObject:
   - component: {fileID: 5997585292206787260}
   - component: {fileID: 5997585292206787261}
   - component: {fileID: 5997585292206787263}
-  - component: {fileID: 5997585292206787262}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -9234,31 +9311,19 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: 30b87407992651b4bafc465135e85016, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: 30b87407992651b4bafc465135e85016, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
---- !u!114 &5997585292206787262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5997585292206787251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cb30202056ec2d48b493694fe94bbbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5997585292210654542
 GameObject:
   m_ObjectHideFlags: 0

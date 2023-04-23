@@ -14,8 +14,10 @@ namespace Player
         [SerializeField] private float moveSpeed;
         [HideInInspector] public Transform playerTransform;
 
+        
+
         private Rigidbody2D rb;
-        private DefaultInputActions playerController;
+        private InputActions playerController;
         
         private void Awake()
         {
@@ -23,7 +25,7 @@ namespace Player
             
             rb = GetComponent<Rigidbody2D>();
 
-            playerController = new DefaultInputActions();
+            playerController = new InputActions();
             playerController.Player.Move.Enable();
         }
 

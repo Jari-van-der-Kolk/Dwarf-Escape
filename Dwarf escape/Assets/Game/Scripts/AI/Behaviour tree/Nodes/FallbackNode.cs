@@ -22,17 +22,17 @@ namespace JBehaviourTree
         {
             while (index < children.Count)
             {
-                var child = children[index];
+                var child = children[index].Update();
 
-                if (child.Update() == State.Running)
+                if (child == State.Running)
                 {
                     return State.Running;
                 }
-                else if (child.Update() == State.Failure)
+                else if (child == State.Failure)
                 {
                     index++;
                 }
-                else if (child.Update() == State.Success)
+                else if (child == State.Success)
                 {
                     index = 0;
                     return State.Running;

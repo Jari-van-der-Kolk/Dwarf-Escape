@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Inventory
 {
-
     public class ItemObject : MonoBehaviour, IInteract
     {
         public InventoryItemData referenceItem;

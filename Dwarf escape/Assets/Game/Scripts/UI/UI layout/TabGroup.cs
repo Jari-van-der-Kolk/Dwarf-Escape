@@ -7,11 +7,11 @@ using UnityEngine.InputSystem;
 public class TabGroup : MonoBehaviour
 {
 
-    public List<TabButton> tabButtons;
+    public List<TabButtons> tabButtons;
     public Color tabIdle;
     public Color tabHover;
     public Color tabActive;
-    public TabButton selectedTab;
+    public TabButtons selectedTab;
 
     public List<GameObject> objectToSwap;
 
@@ -70,9 +70,9 @@ public class TabGroup : MonoBehaviour
         }
     }
     
-    private void SetActive(TabButton tabButton)
+    private void SetActive(TabButtons tabButton)
     {
-        foreach (TabButton t in tabButtons)
+        foreach (TabButtons t in tabButtons)
         {
             t.tabGroup.ResetTabs();
         }
@@ -98,17 +98,17 @@ public class TabGroup : MonoBehaviour
         }
     }
 
-    public void Subscribe(TabButton button)
+    public void Subscribe(TabButtons button)
     {
         if (tabButtons == null)
         {
-            tabButtons = new List<TabButton>();
+            tabButtons = new List<TabButtons>();
         }
         
         tabButtons.Add(button);
     }
 
-    public void OnTabEnter(TabButton button)
+    public void OnTabEnter(TabButtons button)
     {
         ResetTabs();
         if (selectedTab != null || button != selectedTab)
@@ -117,12 +117,12 @@ public class TabGroup : MonoBehaviour
         }
 
     }
-    public void OnTabExit(TabButton button)
+    public void OnTabExit(TabButtons button)
     {
         ResetTabs();
     }
 
-    public void OnTabSelected(TabButton button)
+    public void OnTabSelected(TabButtons button)
     {
         if (selectedTab != null)
         {
@@ -150,7 +150,7 @@ public class TabGroup : MonoBehaviour
     }
     public void ResetTabs()
     {
-        foreach (TabButton button in tabButtons)
+        foreach (TabButtons button in tabButtons)
         {
             if(selectedTab != null && button == selectedTab) continue;
             button.background.color = tabIdle;

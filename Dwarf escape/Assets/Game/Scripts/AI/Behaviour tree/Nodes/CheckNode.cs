@@ -23,7 +23,8 @@ namespace JBehaviourTree
         protected override State OnUpdate()
         {
 
-            if (child.Update() == State.Failure)
+            State state = child.Update();
+            if (state == State.Failure)
                 return State.Failure;
 
             if (check == true)

@@ -37,15 +37,15 @@ namespace JBehaviourTree
 
             while (index < children.Count)
             {
-                var child = children[index];
+                var child = children[index].Update();
 
-                if (child.Update() == State.Success)
+                if (child == State.Success)
                 {
                     index++;
                 }
-                else if (child.Update() == State.Failure || child.Update() == State.Running)
+                else if (child == State.Failure || child == State.Running)
                 {
-                    return child.Update();
+                    return child;
                 }
             }
 

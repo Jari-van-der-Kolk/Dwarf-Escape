@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19d66852a649aeb4d88d7d9ade4a7113, type: 3}
   m_Name: Bone
   m_EditorClassIdentifier: 
-  itemType: 1
+  itemType: 0
   id: Bones
   displayName: Bone
-  tier: 1
+  valueTier: 1
+  rarityTier: 1
   icon: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
   debugMode: 0
   prefab: {fileID: 8954914671612667337, guid: 5bf7ca44c215b5a48a46589c9297ded7, type: 3}

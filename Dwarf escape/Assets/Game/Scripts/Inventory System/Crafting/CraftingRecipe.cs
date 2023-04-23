@@ -25,6 +25,7 @@ public class CraftingRecipe : MonoBehaviour
         {
             RemoveCraftingItems();
             carftAction?.Invoke();
+            GameEvents.instance.UpdateValues();
         }
     }
 

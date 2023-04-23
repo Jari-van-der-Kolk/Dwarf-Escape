@@ -32,9 +32,9 @@ public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         _rectTransform = GetComponent<RectTransform>();
         GetComponent<Image>().sprite = referenceData.data.icon;
         _rectTransform.position = _rectTransform.parent.position;
-        
-        EquipmentSlotManager.updateValues += UpdateValue;
 
+        //EquipmentSlotManager.updateValues += UpdateValue;
+        GameEvents.instance.updateResourceValues += UpdateValue;
     }
     
     public void OnBeginDrag(PointerEventData eventData)
@@ -108,8 +108,11 @@ public class Equipment : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDra
         return comp;
     }
 
-    private void UpdateValue(object sender, EventArgs e)
+    private void UpdateValue()
     {
+        //checks if the stacksize of the equipment item is zero; if so it has to be deleted 
+        if (referenceData.stackSize <= 0)
+            Destroy(gameObject);
         _counterText.text = referenceData.stackSize.ToString();
     }
     

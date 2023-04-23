@@ -6,7 +6,7 @@ namespace Player
 {
     public class Pickaxe : MonoBehaviour
     {
-        private DefaultInputActions defaultInputActions;
+        private InputActions defaultInputActions;
         
         private float dir;
         [SerializeField] private float mineDistance;
@@ -15,7 +15,7 @@ namespace Player
 
         private void Awake()
         {
-            defaultInputActions = new DefaultInputActions();
+            defaultInputActions = new InputActions();
             defaultInputActions.Player.Mine.Enable();
             defaultInputActions.Player.Mine.performed += Mine;
         }

@@ -14,8 +14,6 @@ public class  EquipmentSlotManager : MonoBehaviour
 
     [SerializeField] private List<EquipmentSlot> equipmentSlots;
 
-    public static EventHandler updateValues;
-
     private Vector3 _mainPos;
 
     private void Awake()
@@ -40,6 +38,7 @@ public class  EquipmentSlotManager : MonoBehaviour
             var equipmentSlotMember = transform.GetChild(i).GetComponent<EquipmentSlot>();
             equipmentSlots.Add(equipmentSlotMember);
         }
+
 
     }
     

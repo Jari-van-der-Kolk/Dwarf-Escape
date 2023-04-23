@@ -21,10 +21,10 @@ public class Resource : MonoBehaviour
         counterText.text = referenceData.stackSize.ToString();
         _counterText = counterText;
 
-        ResourceManager.updateValues += UpdateValue;
+        GameEvents.instance.updateResourceValues += UpdateValue;
    }
 
-    private void UpdateValue(object sender, EventArgs e)
+    private void UpdateValue()
     {
         _counterText.text = referenceData.stackSize.ToString();
     }
